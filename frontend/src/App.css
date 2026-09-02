@@ -1,0 +1,778 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: radial-gradient(circle at center, #0b3d2e 0%, #062017 100%);
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+.screen {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #f5e6c8;
+  text-align: center;
+}
+
+/* ---------- Brand ---------- */
+
+.brand-mark {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #b8860b;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.brand-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffd700, transparent);
+  margin: 14px 0;
+}
+
+/* ---------- Home Screen ---------- */
+
+.home-screen {
+  background: radial-gradient(ellipse at 50% 30%, rgba(255, 215, 0, 0.08), transparent 60%);
+}
+
+.home-logo {
+  font-size: 64px;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.35));
+  animation: floatLogo 3s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.home-title {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(180deg, #ffe98a, #d4a017);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 20px rgba(255, 215, 0, 0.25);
+}
+
+.home-subtitle {
+  font-size: 13px;
+  color: #c9b896;
+  margin-top: 6px;
+  margin-bottom: 20px;
+}
+
+.home-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 80%;
+  max-width: 320px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 16px 24px;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ffe98a, #d4a017);
+  color: #1a1200;
+  box-shadow: 0 4px 18px rgba(255, 215, 0, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #ffd700;
+  border: 2px solid #ffd700;
+}
+
+/* ---------- Form Screens (Create/Join) ---------- */
+
+.form-screen {
+  padding: 24px;
+  justify-content: flex-start;
+  padding-top: 56px;
+}
+
+.form-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffd700;
+  margin-bottom: 8px;
+}
+
+.form-screen .brand-divider {
+  margin-bottom: 28px;
+}
+
+.form-group {
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #c9b896;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 10px;
+  border: 1px solid #3a5a4a;
+  background: rgba(255, 255, 255, 0.05);
+  color: #f5e6c8;
+  font-size: 15px;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+  transition: border-color 0.15s ease;
+}
+
+.form-group input:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.12);
+}
+
+.rounds-options {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.rounds-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #3a5a4a;
+  background: transparent;
+  color: #c9b896;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+}
+
+.rounds-btn.selected {
+  border-color: #ffd700;
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.form-error {
+  color: #ff6b6b;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.form-screen .btn {
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 12px;
+}
+
+/* ---------- Lobby Screen ---------- */
+
+.lobby-screen {
+  padding: 24px;
+  justify-content: flex-start;
+  padding-top: 36px;
+}
+
+.lobby-subtitle {
+  color: #c9b896;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.room-code-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(255, 215, 0, 0.04));
+  border: 1px solid #ffd700;
+  border-radius: 14px;
+  padding: 10px 16px;
+  margin-bottom: 18px;
+}
+
+.room-code-value {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #ffd700;
+}
+
+.room-code-copy-btn {
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #ffd700;
+  color: #1a1200;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+}
+
+.lobby-players {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.lobby-player-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #3a5a4a;
+  border-radius: 14px;
+  padding: 12px 16px;
+  transition: border-color 0.15s ease;
+}
+
+.lobby-player-name {
+  font-weight: 700;
+  color: #f5e6c8;
+  font-size: 14px;
+}
+
+.lobby-player-status {
+  font-size: 11px;
+  color: #c9b896;
+}
+
+.lobby-assign-controls select {
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid #3a5a4a;
+  background: #0b3d2e;
+  color: #f5e6c8;
+  font-family: "Poppins", sans-serif;
+}
+
+.lobby-assign-readonly {
+  font-size: 12px;
+  color: #ffd700;
+  font-weight: 600;
+}
+
+.lobby-screen .btn {
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 12px;
+}
+
+/* ---------- Game Screen ---------- */
+
+.game-screen {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  position: relative;
+}
+
+.game-top-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.hakem-banner {
+  text-align: center;
+  color: #ffd700;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  padding: 6px 14px;
+  margin: 6px auto 0;
+  width: fit-content;
+}
+
+.game-table-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px 0;
+}
+
+.table-felt {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, #0f5c3d 0%, #06301f 70%, #041c12 100%);
+  border: 4px solid #d4a017;
+  box-shadow:
+    0 0 0 2px rgba(255, 215, 0, 0.15),
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    inset 0 0 50px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-watermark {
+  position: absolute;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 5px;
+  color: rgba(255, 215, 0, 0.14);
+  pointer-events: none;
+  user-select: none;
+}
+
+.seat-top-abs,
+.seat-left-abs,
+.seat-right-abs {
+  position: absolute;
+  z-index: 5;
+}
+
+.seat-top-abs {
+  top: -34px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.seat-left-abs {
+  left: -34px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.seat-right-abs {
+  right: -34px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.table-center {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.table-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+}
+
+.table-card-bottom {
+  transform: translate(-50%, 34px);
+}
+
+.table-card-top {
+  transform: translate(-50%, -70px);
+}
+
+.table-card-left {
+  transform: translate(-56px, -50%);
+}
+
+.table-card-right {
+  transform: translate(20px, -50%);
+}
+
+.won-tricks-pile {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  display: flex;
+  z-index: 4;
+}
+
+.opp-trick-pile {
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  display: flex;
+  z-index: 4;
+}
+
+.won-trick-mini {
+  width: 16px;
+  height: 24px;
+  margin-left: -11px;
+  border-radius: 4px;
+  background: repeating-linear-gradient(45deg, #7a1f2b, #7a1f2b 3px, #911f2e 3px, #911f2e 6px);
+  border: 1px solid #4a0e15;
+}
+
+.my-seat-info {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.my-hand {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 10px 20px;
+  overflow-x: auto;
+}
+
+.my-hand-card {
+  margin-left: -20px;
+  transition: transform 0.15s ease;
+}
+
+.my-hand-card:first-child {
+  margin-left: 0;
+}
+
+.my-hand-card:hover {
+  transform: translateY(-10px);
+}
+
+/* ---------- Player Seat ---------- */
+
+.player-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+
+.player-seat-active {
+  background: rgba(255, 215, 0, 0.15);
+  box-shadow: 0 0 14px rgba(255, 215, 0, 0.35);
+}
+
+.player-seat-empty {
+  opacity: 0.4;
+}
+
+.player-seat-avatar {
+  position: relative;
+}
+
+.player-seat-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2a5c46, #143d2c);
+  border: 2px solid #ffd700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #ffd700;
+  font-size: 15px;
+}
+
+.player-seat-crown {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+}
+
+.player-seat-name {
+  font-size: 11px;
+  color: #f5e6c8;
+  font-weight: 700;
+  max-width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-seat-cards-count {
+  font-size: 10px;
+  color: #c9b896;
+}
+
+/* ---------- Hokm choice panel ---------- */
+
+.hokm-choice-panel {
+  position: fixed;
+  bottom: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 14px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #ffd700;
+  border-radius: 20px;
+  padding: 10px 16px;
+  z-index: 50;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+}
+
+.hokm-suit-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #fdf6e3;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.hokm-suit-circle:active {
+  transform: scale(0.9);
+}
+
+.hokm-suit-circle.red {
+  color: #c0392b;
+}
+
+.hokm-suit-circle.black {
+  color: #1a1a1a;
+}
+
+/* ---------- Modals ---------- */
+
+.hokm-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.hokm-modal {
+  background: #0b3d2e;
+  border: 2px solid #ffd700;
+  border-radius: 18px;
+  padding: 26px;
+  text-align: center;
+  color: #f5e6c8;
+  min-width: 260px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.hokm-modal h3 {
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+  width: 58px;
+  height: 84px;
+  border-radius: 8px;
+  background: #fdf6e3;
+  border: 1px solid #00000022;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.card-small {
+  width: 34px;
+  height: 50px;
+}
+
+.card-back {
+  background: repeating-linear-gradient(45deg, #7a1f2b, #7a1f2b 6px, #911f2e 6px, #911f2e 12px);
+  border: 1px solid #4a0e15;
+  cursor: default;
+}
+
+.card-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.card-face.red {
+  color: #c0392b;
+}
+
+.card-face.black {
+  color: #1a1a1a;
+}
+
+.card-corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.card-corner-top {
+  top: 4px;
+  left: 4px;
+}
+
+.card-corner-bottom {
+  bottom: 4px;
+  right: 4px;
+  transform: rotate(180deg);
+}
+
+.card-rank {
+  font-size: 12px;
+}
+
+.card-suit {
+  font-size: 11px;
+}
+
+.card-center-suit {
+  font-size: 22px;
+}
+
+.card-small .card-rank {
+  font-size: 8px;
+}
+
+.card-small .card-suit {
+  font-size: 7px;
+}
+
+.card-small .card-center-suit {
+  font-size: 16px;
+}
+
+/* ---------- Scoreboard ---------- */
+
+.scoreboard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 14px;
+  padding: 8px 20px;
+}
+
+.scoreboard-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scoreboard-label {
+  font-size: 9px;
+  color: #c9b896;
+  margin-bottom: 2px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.scoreboard-values {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.scoreboard-team-a {
+  color: #6ec6ff;
+}
+
+.scoreboard-team-b {
+  color: #ff8a80;
+}
+
+.scoreboard-divider {
+  color: #c9b896;
+  font-size: 11px;
+}
+
+.scoreboard-divider-vertical {
+  width: 1px;
+  height: 26px;
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.scoreboard-hokm {
+  font-size: 18px;
+}
+
+.scoreboard-hokm.red {
+  color: #ff6b6b;
+}
+
+.scoreboard-hokm.black {
+  color: #f5e6c8;
+}
+.end-game-btn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 40;
+  background: rgba(200, 50, 50, 0.2);
+  border: 1px solid #c0392b;
+  color: #ff8a80;
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+}
