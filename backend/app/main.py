@@ -6,10 +6,12 @@
 """
 from __future__ import annotations
 
-from fastapi import FastAPI, WebSocket
+from fastapi import FastAPI, Request, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from telegram import Update
 
+from app.bot.main import get_bot_application
 from app.rooms.room_manager import room_manager
 from app.ws.handlers import handle_connection
 
@@ -23,6 +25,32 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.on_event("startup")
+async def on_startup():
+    """موقع بالا اومدن سرور، ربات مقداردهی اولیه میشه و وب‌هوک تنظیم میشه"""
+    bot_app = get_bot_application()
+    await bot_app.initialize()
+    await bot_app.start()
+
+    webhook_url = f"{settings.BACKEND_URL}/telegram/webhook"
+    await bot_app.bot.set_webhook(url=webhook_url)
+
+
+@app.on_event("shutdown")
+async def on_shutdown():
+    bot_app = get_bot_application()
+    await bot_app.stop()
+    await bot_app.shutdown()
+
+
+@app.post("/telegram/webhook")
+async def telegram_webhook(request: Request):
+    """تلگرام هر پیام جدید رو مستقیم به این آدرس POST می‌کنه"""
+    bot_app = get_bot_application()
+    data = await request.json()
+    update = Update.de_json(data, bot_app.bot)
+    await bot_app.process_update(update)
+    return {"ok": True}
 
 # ---------- مدل‌های ورودی HTTP ----------
 

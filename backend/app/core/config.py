@@ -15,6 +15,7 @@ class Settings:
 
     # آدرس Mini App که تلگرام باید باز کنه (بعداً موقع هاست شدن فرانت‌اند پر میشه)
     WEBAPP_URL: str = os.getenv("WEBAPP_URL", "http://localhost:5173")
+    BACKEND_URL: str = os.getenv("BACKEND_URL", "http://localhost:8000")
 
     # تنظیمات بازی
     PLAYERS_PER_ROOM: int = 4          # ثابت: همیشه ۴ نفره (۲ تیم ۲ نفره)
