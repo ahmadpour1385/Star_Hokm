@@ -12,6 +12,7 @@ from pydantic import BaseModel
 from telegram import Update
 
 from app.bot.main import get_bot_application
+from app.core.config import settings
 from app.rooms.room_manager import room_manager
 from app.ws.handlers import handle_connection
 
