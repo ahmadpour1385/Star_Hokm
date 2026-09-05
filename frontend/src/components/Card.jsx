@@ -22,7 +22,12 @@ export function parseCardId(cardId) {
 
 export default function Card({ cardId, faceDown = false, disabled = false, onClick, small = false }) {
   if (faceDown) {
-    return <div className={`card card-back ${small ? "card-small" : ""}`} />;
+    return (
+      <div className={`card card-back ${small ? "card-small" : ""}`}>
+        <div className="card-back-pattern" />
+        <div className="card-back-medallion">SH</div>
+      </div>
+    );
   }
 
   const { rank, suit } = parseCardId(cardId);
@@ -39,6 +44,7 @@ export default function Card({ cardId, faceDown = false, disabled = false, onCli
         <span className="card-suit">{symbol}</span>
       </div>
       <div className="card-center-suit">{symbol}</div>
+      <div className="card-brand-star">✦</div>
       <div className="card-corner card-corner-bottom">
         <span className="card-rank">{rank}</span>
         <span className="card-suit">{symbol}</span>
