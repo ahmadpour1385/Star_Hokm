@@ -164,8 +164,13 @@ export default function GameScreen({ onBackToHome }) {
       </div>
 
       <div className="my-hand">
-        {sortedHand.map((cardId) => (
-          <div key={cardId} className="my-hand-card" onClick={() => handlePlayCard(cardId)}>
+        {sortedHand.map((cardId, idx) => (
+          <div
+            key={cardId}
+            className="my-hand-card"
+            style={{ zIndex: idx }}
+            onClick={() => handlePlayCard(cardId)}
+          >
             <Card cardId={cardId} disabled={isPlayingPhase && !isCardPlayable(cardId)} />
           </div>
         ))}

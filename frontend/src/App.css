@@ -468,7 +468,8 @@ body {
 }
 
 .my-hand-card {
-  margin-left: -20px;
+  margin-left: -15px;
+  position: relative;
   transition: transform 0.15s ease;
 }
 
@@ -586,43 +587,15 @@ body {
   color: #1a1a1a;
 }
 
-/* ---------- Modals ---------- */
-
-.hokm-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.72);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-}
-
-.hokm-modal {
-  background: #0b3d2e;
-  border: 2px solid #ffd700;
-  border-radius: 18px;
-  padding: 26px;
-  text-align: center;
-  color: #f5e6c8;
-  min-width: 260px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-}
-
-.hokm-modal h3 {
-  color: #ffd700;
-  margin-bottom: 10px;
-}
-
 /* ---------- Cards ---------- */
 
 .card {
-  width: 58px;
-  height: 84px;
-  border-radius: 10px;
+  width: 42px;
+  height: 62px;
+  border-radius: 7px;
   background: radial-gradient(ellipse at 30% 20%, #fffdf6, #f3ead2 75%);
-  border: 1.5px solid #c9a227;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  border: 1.2px solid #c9a227;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
   position: relative;
   display: flex;
   align-items: center;
@@ -634,21 +607,21 @@ body {
 }
 
 .card-small {
-  width: 34px;
-  height: 50px;
-  border-radius: 7px;
+  width: 26px;
+  height: 38px;
+  border-radius: 5px;
 }
 
 .card-back {
   background: radial-gradient(ellipse at center, #0f5c3d 0%, #06301f 75%);
-  border: 1.5px solid #c9a227;
+  border: 1.2px solid #c9a227;
   cursor: default;
 }
 
 .card-back-pattern {
   position: absolute;
-  inset: 3px;
-  border-radius: 7px;
+  inset: 2px;
+  border-radius: 5px;
   border: 1px solid rgba(212, 175, 55, 0.35);
   background:
     repeating-linear-gradient(45deg, rgba(212,175,55,0.10) 0 3px, transparent 3px 10px),
@@ -657,23 +630,23 @@ body {
 
 .card-back-medallion {
   position: relative;
-  width: 22px;
-  height: 22px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: radial-gradient(circle, #e8cf7a, #a8812a);
   color: #1a1200;
-  font-size: 9px;
+  font-size: 6.5px;
   font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 5px rgba(212, 175, 55, 0.6);
 }
 
 .card-small .card-back-medallion {
-  width: 14px;
-  height: 14px;
-  font-size: 6px;
+  width: 10px;
+  height: 10px;
+  font-size: 4.5px;
 }
 
 .card-disabled {
@@ -681,13 +654,8 @@ body {
   cursor: not-allowed;
 }
 
-.card-face.red {
-  color: #b5322a;
-}
-
-.card-face.black {
-  color: #161310;
-}
+.card-face.red { color: #b5322a; }
+.card-face.black { color: #161310; }
 
 .card-corner {
   position: absolute;
@@ -699,120 +667,47 @@ body {
   z-index: 2;
 }
 
-.card-corner-top {
-  top: 4px;
-  left: 5px;
-}
+.card-corner-top { top: 3px; left: 4px; }
+.card-corner-bottom { bottom: 3px; right: 4px; transform: rotate(180deg); }
 
-.card-corner-bottom {
-  bottom: 4px;
-  right: 5px;
-  transform: rotate(180deg);
-}
-
-.card-rank {
-  font-size: 12px;
-  font-family: "Poppins", sans-serif;
-}
-
-.card-suit {
-  font-size: 10px;
-}
+.card-rank { font-size: 9.5px; font-family: "Poppins", sans-serif; }
+.card-suit { font-size: 8.5px; }
 
 .card-center-suit {
-  font-size: 24px;
-  opacity: 0.16;
+  font-size: 20px;
+  opacity: 0.32;
+}
+
+.card-face-icon-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  z-index: 1;
+}
+
+.card-face-suit-mini {
+  font-size: 8px;
+  opacity: 0.55;
 }
 
 .card-brand-star {
   position: absolute;
-  top: 6px;
+  top: 4px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 7px;
+  font-size: 6px;
   color: #c9a227;
   opacity: 0.7;
   z-index: 2;
 }
 
-.card-small .card-rank {
-  font-size: 8px;
-}
-
-.card-small .card-suit {
-  font-size: 7px;
-}
-
-.card-small .card-center-suit {
-  font-size: 16px;
-}
-
-.card-small .card-brand-star {
-  display: none;
-}
-
-.card-back {
-  background: repeating-linear-gradient(45deg, #7a1f2b, #7a1f2b 6px, #911f2e 6px, #911f2e 12px);
-  border: 1px solid #4a0e15;
-  cursor: default;
-}
-
-.card-disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.card-face.red {
-  color: #c0392b;
-}
-
-.card-face.black {
-  color: #1a1a1a;
-}
-
-.card-corner {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.card-corner-top {
-  top: 4px;
-  left: 4px;
-}
-
-.card-corner-bottom {
-  bottom: 4px;
-  right: 4px;
-  transform: rotate(180deg);
-}
-
-.card-rank {
-  font-size: 12px;
-}
-
-.card-suit {
-  font-size: 11px;
-}
-
-.card-center-suit {
-  font-size: 22px;
-}
-
-.card-small .card-rank {
-  font-size: 8px;
-}
-
-.card-small .card-suit {
-  font-size: 7px;
-}
-
-.card-small .card-center-suit {
-  font-size: 16px;
-}
+.card-small .card-rank { font-size: 6.5px; }
+.card-small .card-suit { font-size: 6px; }
+.card-small .card-center-suit { font-size: 12px; }
+.card-small .card-face-icon-wrap svg { width: 50%; height: 50%; }
+.card-small .card-face-suit-mini { font-size: 5.5px; }
+.card-small .card-brand-star { display: none; }
 
 /* ---------- Scoreboard ---------- */
 
