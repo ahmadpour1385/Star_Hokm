@@ -106,9 +106,16 @@ export default function GameScreen({ onBackToHome }) {
 
       <div className="game-table-wrapper">
         <div className="table-felt">
-          <span className="table-watermark">STAR HOKM</span>
+          <svg className="table-star" viewBox="0 0 100 100">
+            <polygon
+              points="50,4 61,37 96,37 68,58 78,92 50,71 22,92 32,58 4,37 39,37"
+              fill="#d4af37"
+              opacity="0.9"
+            />
+          </svg>
 
-          <div className="seat-top-abs">
+          <div className="seat-top-abs chair-slot">
+            <div className="chair-back" />
             <PlayerSeat
               player={playerBySeat[(mySeat + 2) % 4]}
               isHakem={hakemSeat === (mySeat + 2) % 4}
@@ -118,7 +125,8 @@ export default function GameScreen({ onBackToHome }) {
             />
           </div>
 
-          <div className="seat-left-abs">
+          <div className="seat-left-abs chair-slot">
+            <div className="chair-back" />
             <PlayerSeat
               player={playerBySeat[(mySeat + 3) % 4]}
               isHakem={hakemSeat === (mySeat + 3) % 4}
@@ -133,7 +141,8 @@ export default function GameScreen({ onBackToHome }) {
             </div>
           </div>
 
-          <div className="seat-right-abs">
+          <div className="seat-right-abs chair-slot">
+            <div className="chair-back" />
             <PlayerSeat
               player={playerBySeat[(mySeat + 1) % 4]}
               isHakem={hakemSeat === (mySeat + 1) % 4}
@@ -159,7 +168,8 @@ export default function GameScreen({ onBackToHome }) {
         </div>
       </div>
 
-      <div className="my-seat-info">
+      <div className="my-seat-info chair-slot">
+        <div className="chair-back" />
         <PlayerSeat player={me} isHakem={hakemSeat === mySeat} isCurrentTurn={isMyTurn} cardsCount={myHand.length} position="bottom" />
       </div>
 

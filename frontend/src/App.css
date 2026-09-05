@@ -346,56 +346,82 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 20px 0;
+  padding: 30px 0;
+}
+
+.game-table-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 1px dashed rgba(212, 175, 55, 0.18);
+  background: radial-gradient(circle, rgba(15, 92, 61, 0.25), transparent 70%);
 }
 
 .table-felt {
   position: relative;
-  width: clamp(160px, 55vw, 230px);
-  height: clamp(160px, 55vw, 230px);
+  width: 210px;
+  height: 210px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, #0f5c3d 0%, #06301f 70%, #041c12 100%);
-  border: 4px solid #d4a017;
+  background: radial-gradient(ellipse at 35% 30%, #1a1a1a 0%, #050505 75%);
+  border: 5px solid #d4af37;
   box-shadow:
-    0 0 0 2px rgba(255, 215, 0, 0.15),
-    0 10px 30px rgba(0, 0, 0, 0.5),
-    inset 0 0 50px rgba(0, 0, 0, 0.45);
+    0 0 0 2px #050505,
+    0 0 0 5px rgba(212, 175, 55, 0.55),
+    0 12px 34px rgba(0, 0, 0, 0.6),
+    inset 0 0 40px rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.table-watermark {
+.table-star {
   position: absolute;
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 5px;
-  color: rgba(255, 215, 0, 0.14);
+  width: 62px;
+  height: 62px;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.55));
   pointer-events: none;
-  user-select: none;
+  z-index: 1;
 }
 
-.seat-top-abs,
-.seat-left-abs,
-.seat-right-abs {
+.chair-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chair-back {
   position: absolute;
-  z-index: 5;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: linear-gradient(160deg, #1c1c1c, #050505);
+  border: 2px solid #d4af37;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.55), inset 0 0 10px rgba(212, 175, 55, 0.12);
+  z-index: 0;
+}
+
+.chair-slot .player-seat {
+  position: relative;
+  z-index: 1;
 }
 
 .seat-top-abs {
-  top: -34px;
+  top: -50px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .seat-left-abs {
-  left: -34px;
+  left: -50px;
   top: 50%;
   transform: translateY(-50%);
 }
 
 .seat-right-abs {
-  right: -34px;
+  right: -50px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -404,6 +430,7 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
+  z-index: 2;
 }
 
 .table-card {
@@ -413,21 +440,10 @@ body {
   z-index: 3;
 }
 
-.table-card-bottom {
-  transform: translate(-50%, 34px);
-}
-
-.table-card-top {
-  transform: translate(-50%, -70px);
-}
-
-.table-card-left {
-  transform: translate(-56px, -50%);
-}
-
-.table-card-right {
-  transform: translate(20px, -50%);
-}
+.table-card-bottom { transform: translate(-50%, 34px); }
+.table-card-top { transform: translate(-50%, -70px); }
+.table-card-left { transform: translate(-56px, -50%); }
+.table-card-right { transform: translate(20px, -50%); }
 
 .won-tricks-pile {
   position: absolute;
@@ -457,7 +473,8 @@ body {
 .my-seat-info {
   display: flex;
   justify-content: center;
-  margin-top: 4px;
+  margin-top: 10px;
+  position: relative;
 }
 
 .my-hand {
