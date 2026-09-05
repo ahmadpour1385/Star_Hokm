@@ -467,10 +467,15 @@ body {
   overflow-x: auto;
 }
 
+.my-hand {
+  direction: ltr;
+}
+
 .my-hand-card {
-  margin-left: -15px;
+  margin-left: -18px;
   position: relative;
   transition: transform 0.15s ease;
+  isolation: isolate;
 }
 
 .my-hand-card:first-child {

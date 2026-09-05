@@ -20,12 +20,30 @@ export function parseCardId(cardId) {
 }
 
 function FaceIcon({ rank }) {
+  if (rank === "K") {
+    return (
+      <svg viewBox="0 0 24 24" width="58%" height="58%" fill="currentColor" style={{ opacity: 0.85 }}>
+        <path d="M3 17l1.5-8 4 4 3.5-6 3.5 6 4-4L21 17H3z" />
+        <rect x="4" y="17.5" width="16" height="2" rx="0.6" />
+        <circle cx="12" cy="6.3" r="1.3" />
+        <circle cx="4.5" cy="9.3" r="1" />
+        <circle cx="19.5" cy="9.3" r="1" />
+      </svg>
+    );
+  }
+  if (rank === "Q") {
+    return (
+      <svg viewBox="0 0 24 24" width="54%" height="54%" fill="currentColor" style={{ opacity: 0.85 }}>
+        <path d="M12 3c2.6 2 4 4.8 4 7.6 0 3.4-1.8 6.2-4 8.4-2.2-2.2-4-5-4-8.4C8 7.8 9.4 5 12 3z" />
+        <circle cx="12" cy="10.2" r="1.6" fill="#0000" stroke="currentColor" strokeWidth="1" />
+        <path d="M6 6.5c1.4-1 3-1.5 6-1.5s4.6.5 6 1.5" fill="none" stroke="currentColor" strokeWidth="1" />
+      </svg>
+    );
+  }
   return (
-    <svg viewBox="0 0 24 24" width="60%" height="60%" fill="currentColor" style={{ opacity: 0.6 }}>
-      <circle cx="12" cy="9" r="4" />
-      <path d="M4 20c0-4.2 3.5-7.5 8-7.5s8 3.3 8 7.5H4z" />
-      {rank === "K" && <path d="M5.5 4.5l2 2.8 4-3.6 4 3.6 2-2.8-1.1 4.8H6.6z" />}
-      {rank === "Q" && <path d="M7 5l2 2 3-2.8 3 2.8 2-2-1 3.8H8z" />}
+    <svg viewBox="0 0 24 24" width="52%" height="58%" fill="currentColor" style={{ opacity: 0.85 }}>
+      <path d="M8 2h8l-2 4 2 3-3 2 3 2-2 3 2 4H8l2-4-3-2 3-2-3-2 2-3-2-4z" opacity="0.9" />
+      <circle cx="12" cy="12" r="1.4" fill="#0000" />
     </svg>
   );
 }
