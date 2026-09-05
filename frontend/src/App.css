@@ -409,18 +409,21 @@ body {
 }
 
 .seat-top-abs {
+  position: absolute;
   top: clamp(-92px, -26vmin, -70px);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .seat-left-abs {
+  position: absolute;
   left: clamp(-92px, -26vmin, -70px);
   top: 50%;
   transform: translateY(-50%);
 }
 
 .seat-right-abs {
+  position: absolute;
   right: clamp(-92px, -26vmin, -70px);
   top: 50%;
   transform: translateY(-50%);
