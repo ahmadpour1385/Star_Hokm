@@ -20,6 +20,7 @@ export class GameConnection {
       this.socket.onclose = () => {
         const wasIntentional = this._intentional;
         this._intentional = false;
+
         if (!wasIntentional) {
           this._emit("connection_closed", {});
         }
@@ -46,7 +47,9 @@ export class GameConnection {
     if (!this.listeners.has(eventName)) {
       this.listeners.set(eventName, new Set());
     }
+
     this.listeners.get(eventName).add(callback);
+
     return () => this.listeners.get(eventName)?.delete(callback);
   }
 
@@ -59,10 +62,10 @@ export class GameConnection {
     this.socket?.close();
     this.socket = null;
   }
-}
 
   isConnected() {
     return !!this.socket && this.socket.readyState === WebSocket.OPEN;
   }
+}
 
 export const gameConnection = new GameConnection();
