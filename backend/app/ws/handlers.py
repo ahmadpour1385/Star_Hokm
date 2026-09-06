@@ -7,7 +7,7 @@ from __future__ import annotations
 from fastapi import WebSocket, WebSocketDisconnect
 
 from app.core.cards import Card, Rank, Suit
-from app.core.models import GamePhase, TeamId
+from app.core.models import GamePhase, RoomStatus, TeamId
 from app.rooms.room import Room
 from app.rooms.room_manager import room_manager
 from app.ws.connection_manager import connection_manager
@@ -15,7 +15,7 @@ from app.ws.schemas import ClientMessage, ServerMessage, error_message
 
 
 async def handle_connection(websocket: WebSocket, room_code: str, user_id: int) -> None:
-    """نقطه ورود اصلی: وقتی یه کلاینت به یه اتاق وصل میشه"""
+    """نقطه ورود اصلی: وقتی یه کلاینت به یه اتاق وصل میشه (چه اولین بار، چه اتصال مجدد)"""
     room = room_manager.get_room(room_code)
     if room is None or user_id not in room.players:
         await websocket.close(code=4404, reason="اتاق یا بازیکن پیدا نشد")
@@ -24,6 +24,15 @@ async def handle_connection(websocket: WebSocket, room_code: str, user_id: int) 
     await connection_manager.connect(room_code, user_id, websocket)
     await _broadcast_room_update(room)
 
+    # اگه بازی از قبل در جریان بود (یعنی این یه اتصال مجدد بعد از رفرش/قطعی است)،
+    # کل وضعیت فعلی بازی فقط برای همین کاربر دوباره فرستاده میشه
+    if room.status == RoomStatus.IN_PROGRESS and room.game_engine is not None:
+        sync_data = _build_sync_data(room, user_id)
+        await connection_manager.send_to_user(
+            room.room_code, user_id,
+            ServerMessage(event="game_state_sync", data=sync_data).model_dump(),
+        )
+
     try:
         while True:
             raw = await websocket.receive_json()
@@ -31,6 +40,35 @@ async def handle_connection(websocket: WebSocket, room_code: str, user_id: int) 
             await _route_action(room, user_id, message)
     except WebSocketDisconnect:
         connection_manager.disconnect(room_code, user_id)
+        # بازیکن رو از room.players حذف نمی‌کنیم تا بتونه دوباره وصل بشه،
+        # ولی همه رو مطلع می‌کنیم که این بازیکن الان آفلاینه
+        await _broadcast_room_update(room)
+
+
+def _build_sync_data(room: Room, user_id: int) -> dict:
+    """کل وضعیت لازم برای بازسازی صفحه‌ی بازی یک کاربر خاص، برای اتصال مجدد"""
+    engine = room.game_engine
+    round_state = engine.current_round
+    seat = room.players[user_id].seat
+    hand = round_state.hands.get(seat, []) if round_state else []
+
+    table_cards = []
+    if round_state and round_state.current_trick:
+        table_cards = [{"seat": p.seat, "card": p.card.id} for p in round_state.current_trick.plays]
+
+    return {
+        "hakem_seat": round_state.hakem_seat if round_state else None,
+        "hokm_suit": round_state.hokm_suit.value if round_state and round_state.hokm_suit else None,
+        "current_turn_seat": round_state.current_turn_seat if round_state else None,
+        "my_hand": [c.id for c in hand],
+        "table_cards": table_cards,
+        "tricks": {t.value: c for t, c in round_state.tricks_won_by_team.items()} if round_state else {0: 0, 1: 0},
+        "team_rounds": {
+            TeamId.TEAM_A.value: engine.teams[TeamId.TEAM_A].rounds_won,
+            TeamId.TEAM_B.value: engine.teams[TeamId.TEAM_B].rounds_won,
+        },
+        "pending_round_result": room.pending_round_result,
+    }
 
 
 async def _route_action(room: Room, user_id: int, message: ClientMessage) -> None:
@@ -136,7 +174,6 @@ async def _handle_play_card(room: Room, user_id: int, data: dict) -> None:
 
 
 async def _handle_start_next_round(room: Room, user_id: int, data: dict) -> None:
-    """فقط بازیکنی که نوبت پخش کارت راند بعدی رو داره می‌تونه راند جدید رو شروع کنه"""
     engine = room.game_engine
     expected_seat = engine.next_dealer_seat
     seat = _seat_by_user(room, user_id)
@@ -146,8 +183,8 @@ async def _handle_start_next_round(room: Room, user_id: int, data: dict) -> None
 
     await _start_new_round(room)
 
+
 async def _handle_end_game(room: Room, user_id: int, data: dict) -> None:
-    """فقط سازنده اتاق می‌تونه در هر لحظه بازی رو تموم و اتاق رو منحل کنه"""
     if user_id != room.owner_user_id:
         raise PermissionError("فقط سازنده اتاق می‌تونه بازی رو تموم کنه")
 
@@ -156,6 +193,7 @@ async def _handle_end_game(room: Room, user_id: int, data: dict) -> None:
         ServerMessage(event="room_dissolved", data={}).model_dump(),
     )
     room_manager.remove_room(room.room_code)
+
 
 # ---------- کمکی‌های داخلی ----------
 
@@ -173,11 +211,18 @@ def _seat_by_user(room: Room, user_id: int) -> int:
 async def _broadcast_room_update(room: Room) -> None:
     await connection_manager.broadcast(
         room.room_code,
-        ServerMessage(event="room_update", data=room.to_public_dict()).model_dump(),
+        ServerMessage(
+            event="room_update",
+            data={
+                **room.to_public_dict(),
+                "connected_user_ids": connection_manager.connected_user_ids(room.room_code),
+            },
+        ).model_dump(),
     )
 
 
 async def _start_new_round(room: Room) -> None:
+    room.pending_round_result = None
     engine = room.game_engine
     round_state = engine.start_new_round()
     round_state.run_first_deal()
@@ -197,7 +242,6 @@ async def _start_new_round(room: Room) -> None:
 
 
 async def _send_all_hands(room: Room) -> None:
-    """به هر بازیکن فقط دست خودش رو می‌فرسته - بقیه نمی‌بینن"""
     round_state = room.game_engine.current_round
 
     def build(user_id: int) -> dict:
@@ -222,22 +266,21 @@ async def _notify_turn(room: Room) -> None:
 async def _finish_round(room: Room) -> None:
     engine = room.game_engine
     result = engine.finish_current_round()
-
     is_game_over = engine.is_game_over
+
+    payload = {
+        "winning_team": result.winning_team.value,
+        "is_koot": result.is_koot,
+        "is_hakem_koot": result.is_hakem_koot,
+        "points_awarded": result.points_awarded,
+        "score": engine.get_score_summary(),
+        "next_dealer_seat": None if is_game_over else engine.next_dealer_seat,
+    }
+    room.pending_round_result = None if is_game_over else payload
 
     await connection_manager.broadcast(
         room.room_code,
-        ServerMessage(
-            event="round_over",
-            data={
-                "winning_team": result.winning_team.value,
-                "is_koot": result.is_koot,
-                "is_hakem_koot": result.is_hakem_koot,
-                "points_awarded": result.points_awarded,
-                "score": engine.get_score_summary(),
-                "next_dealer_seat": None if is_game_over else engine.next_dealer_seat,
-            },
-        ).model_dump(),
+        ServerMessage(event="round_over", data=payload).model_dump(),
     )
 
     if is_game_over:

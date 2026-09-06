@@ -23,6 +23,7 @@ class Room:
     status: RoomStatus = RoomStatus.WAITING
 
     game_engine: GameEngine | None = field(default=None, init=False)
+    pending_round_result: dict | None = field(default=None, init=False)
 
     # ---------- مدیریت بازیکن‌ها ----------
 
