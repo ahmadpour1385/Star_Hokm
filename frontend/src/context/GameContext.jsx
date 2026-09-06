@@ -2,6 +2,26 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { gameConnection } from "../ws/connection";
 
 const GameContext = createContext(null);
+const SESSION_KEY = "starHokmSession";
+
+function saveSession(roomCode, userId) {
+  try {
+    localStorage.setItem(SESSION_KEY, JSON.stringify({ roomCode, userId }));
+  } catch {}
+}
+function clearStoredSession() {
+  try {
+    localStorage.removeItem(SESSION_KEY);
+  } catch {}
+}
+function loadStoredSession() {
+  try {
+    const raw = localStorage.getItem(SESSION_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
 
 export function GameProvider({ children }) {
   const [userId, setUserId] = useState(null);
@@ -25,6 +45,7 @@ export function GameProvider({ children }) {
   const [gameOverResult, setGameOverResult] = useState(null);
 
   const [lastError, setLastError] = useState(null);
+  const [pendingSession, setPendingSession] = useState(() => loadStoredSession());
 
   const connectedRef = useRef(false);
 
@@ -87,6 +108,23 @@ export function GameProvider({ children }) {
     unsubscribers.push(gameConnection.on("room_dissolved", () => setRoomDissolved(true)));
     unsubscribers.push(gameConnection.on("error", (data) => setLastError(data.message)));
 
+    unsubscribers.push(
+      gameConnection.on("game_state_sync", (data) => {
+        setGameStarted(true);
+        setHakemSeat(data.hakem_seat);
+        setHokmSuit(data.hokm_suit);
+        setMyHand(data.my_hand);
+        setCurrentTurnSeat(data.current_turn_seat);
+        setTableCards(data.table_cards.map((p) => ({ seat: p.seat, card: p.card })));
+        setTricksCount(data.tricks);
+        setTeamRounds(data.team_rounds);
+        if (data.pending_round_result) {
+          setRoundResult(data.pending_round_result);
+          setNextDealerSeat(data.pending_round_result.next_dealer_seat);
+        }
+      })
+    );
+
     return () => unsubscribers.forEach((unsub) => unsub());
   }, []);
 
@@ -112,11 +150,26 @@ export function GameProvider({ children }) {
     setUserId(uid);
     setRoomCode(code);
     connectedRef.current = true;
+    saveSession(code, uid);
   }
 
   function acknowledgeDissolved() {
     gameConnection.disconnect();
     resetGameState();
+    clearStoredSession();
+  }
+
+  async function confirmReconnect() {
+    const session = pendingSession;
+    setPendingSession(null);
+    if (session) {
+      await connectToRoom(session.roomCode, session.userId);
+    }
+  }
+
+  function declineReconnect() {
+    clearStoredSession();
+    setPendingSession(null);
   }
 
   function assignTeam(targetUserId, team, seat) {
@@ -142,10 +195,11 @@ export function GameProvider({ children }) {
   }
 
   const value = {
-    userId, roomCode, room, gameStarted, roomDissolved,
+    userId, roomCode, room, gameStarted, roomDissolved, pendingSession,
     hakemSeat, hokmSuit, myHand, currentTurnSeat, tableCards,
     tricksCount, lastTrickWinnerSeat, teamRounds, roundResult, nextDealerSeat, gameOverResult, lastError,
-    connectToRoom, assignTeam, setReady, startGame, chooseHokm, playCard, startNextRound, endGame, acknowledgeDissolved,
+    connectToRoom, assignTeam, setReady, startGame, chooseHokm, playCard, startNextRound, endGame,
+    acknowledgeDissolved, confirmReconnect, declineReconnect,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

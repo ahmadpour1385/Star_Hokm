@@ -813,3 +813,8 @@ body {
   cursor: pointer;
   font-family: "Poppins", sans-serif;
 }
+
+.player-seat-offline {
+  opacity: 0.4;
+  filter: grayscale(0.7);
+}

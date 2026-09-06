@@ -116,14 +116,14 @@ export default function GameScreen({ onBackToHome }) {
 
           <div className="seat-top-abs chair-slot">
             <div className="chair-back" />
-            <PlayerSeat
+             <PlayerSeat
               player={playerBySeat[(mySeat + 2) % 4]}
               isHakem={hakemSeat === (mySeat + 2) % 4}
               isCurrentTurn={currentTurnSeat === (mySeat + 2) % 4}
               cardsCount={13}
               position="top"
+              isOffline={playerBySeat[(mySeat + 2) % 4] && !room.connected_user_ids?.includes(playerBySeat[(mySeat + 2) % 4].user_id)}
             />
-          </div>
 
           <div className="seat-left-abs chair-slot">
             <div className="chair-back" />
@@ -133,6 +133,7 @@ export default function GameScreen({ onBackToHome }) {
               isCurrentTurn={currentTurnSeat === (mySeat + 3) % 4}
               cardsCount={13}
               position="left"
+              isOffline={playerBySeat[(mySeat + 3) % 4] && !room.connected_user_ids?.includes(playerBySeat[(mySeat + 3) % 4].user_id)}
             />
             <div className="opp-trick-pile">
               {Array.from({ length: oppTricks }).map((_, i) => (
@@ -149,9 +150,11 @@ export default function GameScreen({ onBackToHome }) {
               isCurrentTurn={currentTurnSeat === (mySeat + 1) % 4}
               cardsCount={13}
               position="right"
+              isOffline={playerBySeat[(mySeat + 1) % 4] && !room.connected_user_ids?.includes(playerBySeat[(mySeat + 1) % 4].user_id)}
             />
           </div>
-                    <div className="seat-bottom-abs chair-slot">
+
+          <div className="seat-bottom-abs chair-slot">
             <div className="chair-back" />
             <PlayerSeat
               player={me}
