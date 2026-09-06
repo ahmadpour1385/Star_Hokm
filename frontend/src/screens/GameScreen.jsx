@@ -151,6 +151,16 @@ export default function GameScreen({ onBackToHome }) {
               position="right"
             />
           </div>
+                    <div className="seat-bottom-abs chair-slot">
+            <div className="chair-back" />
+            <PlayerSeat
+              player={me}
+              isHakem={hakemSeat === mySeat}
+              isCurrentTurn={isMyTurn}
+              cardsCount={myHand.length}
+              position="bottom"
+            />
+          </div>
 
           <div className="table-center">
             {tableCards.map((play, idx) => (
@@ -166,11 +176,6 @@ export default function GameScreen({ onBackToHome }) {
             ))}
           </div>
         </div>
-      </div>
-
-      <div className="my-seat-info chair-slot">
-        <div className="chair-back" />
-        <PlayerSeat player={me} isHakem={hakemSeat === mySeat} isCurrentTurn={isMyTurn} cardsCount={myHand.length} position="bottom" />
       </div>
 
       <div className="my-hand">

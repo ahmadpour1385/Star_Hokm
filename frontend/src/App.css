@@ -429,6 +429,13 @@ body {
   transform: translateY(-50%);
 }
 
+.seat-bottom-abs {
+  position: absolute;
+  bottom: clamp(-92px, -26vmin, -70px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .table-center {
   position: relative;
   width: 100%;
@@ -471,13 +478,6 @@ body {
   border-radius: 4px;
   background: repeating-linear-gradient(45deg, #7a1f2b, #7a1f2b 3px, #911f2e 3px, #911f2e 6px);
   border: 1px solid #4a0e15;
-}
-
-.my-seat-info {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  position: relative;
 }
 
 .my-hand {
