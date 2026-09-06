@@ -79,7 +79,7 @@ export default function GameScreen({ onBackToHome }) {
         </div>
       )}
 
-            {isOwner && (
+      {isOwner && (
         <button className="end-game-btn" onClick={() => setShowEndConfirm(true)}>
           ✕ End Game
         </button>
@@ -116,7 +116,7 @@ export default function GameScreen({ onBackToHome }) {
 
           <div className="seat-top-abs chair-slot">
             <div className="chair-back" />
-             <PlayerSeat
+            <PlayerSeat
               player={playerBySeat[(mySeat + 2) % 4]}
               isHakem={hakemSeat === (mySeat + 2) % 4}
               isCurrentTurn={currentTurnSeat === (mySeat + 2) % 4}
@@ -124,6 +124,7 @@ export default function GameScreen({ onBackToHome }) {
               position="top"
               isOffline={playerBySeat[(mySeat + 2) % 4] && !room.connected_user_ids?.includes(playerBySeat[(mySeat + 2) % 4].user_id)}
             />
+          </div>
 
           <div className="seat-left-abs chair-slot">
             <div className="chair-back" />
@@ -208,7 +209,7 @@ export default function GameScreen({ onBackToHome }) {
         </div>
       )}
 
-            {roundResult && !gameOverResult && (
+      {roundResult && !gameOverResult && (
         <div className="hokm-modal-backdrop">
           <div className="hokm-modal">
             <h3>Round Over</h3>
