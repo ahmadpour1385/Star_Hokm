@@ -410,7 +410,7 @@ body {
 
 .seat-top-abs {
   position: absolute;
-  top: clamp(-108px, -32vmin, -84px);
+  top: clamp(-114px, -34vmin, -90px);
   left: 50%;
   transform: translateX(-50%);
 }
@@ -431,7 +431,7 @@ body {
 
 .seat-bottom-abs {
   position: absolute;
-  bottom: clamp(-108px, -32vmin, -84px);
+  bottom: clamp(-114px, -34vmin, -90px);
   left: 50%;
   transform: translateX(-50%);
 }
