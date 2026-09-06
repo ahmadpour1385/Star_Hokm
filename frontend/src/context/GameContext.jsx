@@ -47,6 +47,30 @@ export function GameProvider({ children }) {
   const [lastError, setLastError] = useState(null);
   const [pendingSession, setPendingSession] = useState(() => loadStoredSession());
 
+    const connectedRef = useRef(false);
+
+  useEffect(() => {
+    function checkAndPromptReconnect() {
+      if (document.visibilityState === "visible" && !gameConnection.isConnected()) {
+        const stored = loadStoredSession();
+        if (stored) {
+          setPendingSession(stored);
+        }
+      }
+    }
+    document.addEventListener("visibilitychange", checkAndPromptReconnect);
+    window.addEventListener("pageshow", checkAndPromptReconnect);
+    window.addEventListener("focus", checkAndPromptReconnect);
+    return () => {
+      document.removeEventListener("visibilitychange", checkAndPromptReconnect);
+      window.removeEventListener("pageshow", checkAndPromptReconnect);
+      window.removeEventListener("focus", checkAndPromptReconnect);
+    };
+  }, []);
+
+  useEffect(() => {
+    const unsubscribers = [];
+
   const connectedRef = useRef(false);
 
   useEffect(() => {

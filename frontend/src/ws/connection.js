@@ -61,4 +61,8 @@ export class GameConnection {
   }
 }
 
+  isConnected() {
+    return !!this.socket && this.socket.readyState === WebSocket.OPEN;
+  }
+
 export const gameConnection = new GameConnection();
