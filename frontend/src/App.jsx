@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { GameProvider, useGame } from "./context/GameContext";
 import HomeScreen from "./screens/HomeScreen";
+import WelcomeScreen from "./screens/WelcomeScreen";
 import CreateRoomScreen from "./screens/CreateRoomScreen";
 import JoinRoomScreen from "./screens/JoinRoomScreen";
 import LobbyScreen from "./screens/LobbyScreen";
@@ -8,7 +9,7 @@ import GameScreen from "./screens/GameScreen";
 import "./App.css";
 
 function AppContent() {
-  const [screen, setScreen] = useState("home");
+  const [screen, setScreen] = useState("welcome");
   const {
     gameStarted, roomDissolved, acknowledgeDissolved,
     pendingSession, confirmReconnect,
@@ -45,6 +46,9 @@ function AppContent() {
     );
   }
 
+  if (screen === "welcome") {
+    return <WelcomeScreen onStart={() => setScreen("home")} />;
+  }
   if (screen === "home") {
     return <HomeScreen onSelectCreate={() => setScreen("create")} onSelectJoin={() => setScreen("join")} />;
   }

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { gameConnection } from "../ws/connection";
+import { recordGameResult } from "../utils/profile";
 
 const GameContext = createContext(null);
 const SESSION_KEY = "starHokmSession";
@@ -50,6 +51,8 @@ export function GameProvider({ children }) {
   const [pendingSession, setPendingSession] = useState(() => loadStoredSession());
 
   const connectedRef = useRef(false);
+  const roomRef = useRef(null);
+  const userIdRef = useRef(null);
 
   useEffect(() => {
     function checkAndPromptReconnect() {
@@ -156,7 +159,17 @@ export function GameProvider({ children }) {
     );
 
     unsubscribers.push(
-      gameConnection.on("game_over", (data) => setGameOverResult(data))
+      gameConnection.on("game_over", (data) => {
+        setGameOverResult(data);
+        const currentRoom = roomRef.current;
+        const uid = userIdRef.current;
+        if (currentRoom && uid != null) {
+          const me = currentRoom.players.find((p) => p.user_id === uid);
+          if (me && me.team !== null) {
+            recordGameResult(me.team === data.winning_team);
+          }
+        }
+      })
     );
 
     unsubscribers.push(
@@ -285,6 +298,15 @@ export function GameProvider({ children }) {
   function endGame() {
     gameConnection.send("end_game");
   }
+
+  useEffect(() => {
+    roomRef.current = room;
+  }, [room]);
+
+  useEffect(() => {
+    userIdRef.current = userId;
+  }, [userId]);
+
 
   const value = {
     userId,
