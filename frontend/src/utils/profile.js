@@ -2,6 +2,7 @@ const PROFILE_KEY = "starHokmProfile";
 
 const DEFAULT_PROFILE = {
   displayName: "",
+  bio: "",
   gamesPlayed: 0,
   wins: 0,
   losses: 0,
@@ -25,6 +26,13 @@ function saveProfile(profile) {
 export function saveDisplayName(name) {
   const profile = getProfile();
   profile.displayName = name;
+  saveProfile(profile);
+  return profile;
+}
+
+export function saveBio(bio) {
+  const profile = getProfile();
+  profile.bio = bio;
   saveProfile(profile);
   return profile;
 }

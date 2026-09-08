@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { joinRoom } from "../ws/api";
 import { useGame } from "../context/GameContext";
+import { getProfile } from "../utils/profile";
 
 export default function JoinRoomScreen({ onBack, onRoomJoined }) {
   const { connectToRoom } = useGame();
 
-  const [displayName, setDisplayName] = useState("");
   const [roomCode, setRoomCode] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -14,8 +14,9 @@ export default function JoinRoomScreen({ onBack, onRoomJoined }) {
   async function handleJoin() {
     setError("");
 
-    if (!displayName.trim()) {
-      setError("Please enter your display name");
+    const displayName = getProfile().displayName?.trim();
+    if (!displayName) {
+      setError("Please set your display name in your profile first");
       return;
     }
     if (!roomCode.trim()) {
@@ -35,7 +36,7 @@ export default function JoinRoomScreen({ onBack, onRoomJoined }) {
         roomCode: roomCode.trim(),
         password,
         userId,
-        displayName: displayName.trim(),
+        displayName,
       });
 
       await connectToRoom(roomCode.trim(), userId);
@@ -50,16 +51,6 @@ export default function JoinRoomScreen({ onBack, onRoomJoined }) {
   return (
     <div className="screen form-screen">
       <h2 className="form-title">🔑 Join Room</h2>
-
-      <div className="form-group">
-        <label>Your Name</label>
-        <input
-          type="text"
-          value={displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
-          placeholder="e.g. Amir"
-        />
-      </div>
 
       <div className="form-group">
         <label>Room Code</label>

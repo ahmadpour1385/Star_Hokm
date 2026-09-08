@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { GameProvider, useGame } from "./context/GameContext";
-import HomeScreen from "./screens/HomeScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import HomeScreen from "./screens/HomeScreen";
 import CreateRoomScreen from "./screens/CreateRoomScreen";
 import JoinRoomScreen from "./screens/JoinRoomScreen";
 import LobbyScreen from "./screens/LobbyScreen";
@@ -15,7 +16,6 @@ function AppContent() {
     pendingSession, confirmReconnect,
   } = useGame();
 
-  // اتصال خودکار و بی‌صدا به آخرین اتاق، بدون هیچ سوالی از کاربر
   useEffect(() => {
     if (pendingSession) {
       (async () => {
@@ -26,7 +26,7 @@ function AppContent() {
   }, [pendingSession]);
 
   useEffect(() => {
-    if (gameStarted && (screen === "lobby" || screen === "home")) {
+    if (gameStarted && (screen === "lobby" || screen === "home" || screen === "welcome")) {
       setScreen("game");
     }
   }, [gameStarted, screen]);
@@ -34,7 +34,7 @@ function AppContent() {
   useEffect(() => {
     if (roomDissolved) {
       acknowledgeDissolved();
-      setScreen("home");
+      setScreen("welcome");
     }
   }, [roomDissolved]);
 
@@ -47,7 +47,15 @@ function AppContent() {
   }
 
   if (screen === "welcome") {
-    return <WelcomeScreen onStart={() => setScreen("home")} />;
+    return (
+      <WelcomeScreen
+        onStart={() => setScreen("home")}
+        onOpenProfile={() => setScreen("profile")}
+      />
+    );
+  }
+  if (screen === "profile") {
+    return <ProfileScreen onBack={() => setScreen("welcome")} />;
   }
   if (screen === "home") {
     return <HomeScreen onSelectCreate={() => setScreen("create")} onSelectJoin={() => setScreen("join")} />;
@@ -62,7 +70,7 @@ function AppContent() {
     return <LobbyScreen onGameStarted={() => setScreen("game")} />;
   }
   if (screen === "game") {
-    return <GameScreen onBackToHome={() => setScreen("home")} />;
+    return <GameScreen onBackToHome={() => setScreen("welcome")} />;
   }
   return null;
 }
