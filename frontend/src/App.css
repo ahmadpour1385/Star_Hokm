@@ -417,14 +417,14 @@ body {
 
 .seat-left-abs {
   position: absolute;
-  left: clamp(-92px, -26vmin, -70px);
+  left: clamp(-114px, -34vmin, -90px);
   top: 50%;
   transform: translateY(-50%);
 }
 
 .seat-right-abs {
   position: absolute;
-  right: clamp(-92px, -26vmin, -70px);
+  right: clamp(-114px, -34vmin, -90px);
   top: 50%;
   transform: translateY(-50%);
 }

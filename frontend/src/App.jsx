@@ -9,10 +9,23 @@ import "./App.css";
 
 function AppContent() {
   const [screen, setScreen] = useState("home");
-  const { gameStarted, roomDissolved, acknowledgeDissolved } = useGame();
+  const {
+    gameStarted, roomDissolved, acknowledgeDissolved,
+    pendingSession, confirmReconnect,
+  } = useGame();
+
+  // اتصال خودکار و بی‌صدا به آخرین اتاق، بدون هیچ سوالی از کاربر
+  useEffect(() => {
+    if (pendingSession) {
+      (async () => {
+        await confirmReconnect();
+        setScreen("lobby");
+      })();
+    }
+  }, [pendingSession]);
 
   useEffect(() => {
-    if (gameStarted && screen === "lobby") {
+    if (gameStarted && (screen === "lobby" || screen === "home")) {
       setScreen("game");
     }
   }, [gameStarted, screen]);
@@ -23,6 +36,14 @@ function AppContent() {
       setScreen("home");
     }
   }, [roomDissolved]);
+
+  if (pendingSession) {
+    return (
+      <div className="screen">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   if (screen === "home") {
     return <HomeScreen onSelectCreate={() => setScreen("create")} onSelectJoin={() => setScreen("join")} />;
