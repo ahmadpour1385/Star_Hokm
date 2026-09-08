@@ -822,8 +822,10 @@ body {
 
 .welcome-screen {
   position: relative;
-  justify-content: center;
-  gap: 4px;
+  justify-content: flex-start;
+  padding-top: 130px;
+  gap: 0;
+  overflow: hidden;
 }
 
 .profile-card {
@@ -1080,13 +1082,14 @@ body {
   position: absolute;
   animation: floatCard 4.5s ease-in-out infinite;
   filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
+  transform: scale(1.7);
 }
 
-.fc-1 { top: 6%; left: 12%; transform: rotate(-18deg); animation-delay: 0s; }
-.fc-2 { top: 10%; right: 10%; transform: rotate(14deg); animation-delay: 0.6s; }
-.fc-3 { bottom: 20%; left: 6%; transform: rotate(10deg); animation-delay: 1.2s; }
-.fc-4 { bottom: 14%; right: 8%; transform: rotate(-12deg); animation-delay: 1.8s; }
-.fc-5 { top: 42%; left: 2%; transform: rotate(-6deg); animation-delay: 2.4s; }
+.fc-1 { top: 4%; left: 8%; transform: scale(1.7) rotate(-18deg); animation-delay: 0s; }
+.fc-2 { top: 8%; right: 6%; transform: scale(1.7) rotate(14deg); animation-delay: 0.6s; }
+.fc-3 { bottom: 22%; left: 2%; transform: scale(1.7) rotate(10deg); animation-delay: 1.2s; }
+.fc-4 { bottom: 16%; right: 4%; transform: scale(1.7) rotate(-12deg); animation-delay: 1.8s; }
+.fc-5 { top: 44%; left: -2%; transform: scale(1.7) rotate(-6deg); animation-delay: 2.4s; }
 
 @keyframes floatCard {
   0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
@@ -1095,26 +1098,32 @@ body {
 
 .welcome-chair-wrap {
   position: relative;
-  width: 150px;
-  height: 210px;
+  width: 210px;
+  height: 280px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   z-index: 2;
+  perspective: 600px;
 }
 
 .welcome-chair-back {
   position: absolute;
-  bottom: 50px;
-  width: 104px;
-  height: 138px;
-  border-radius: 22px 22px 8px 8px;
-  background: linear-gradient(160deg, #232323, #050505 70%);
-  border: 3px solid #d4af37;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(212, 175, 55, 0.14);
+  bottom: 68px;
+  width: 146px;
+  height: 186px;
+  border-radius: 28px 28px 10px 10px;
+  background: linear-gradient(155deg, #2e2e2e 0%, #161616 45%, #050505 100%);
+  border: 4px solid #d4af37;
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.65),
+    inset -10px 0 18px rgba(0,0,0,0.5),
+    inset 10px 0 18px rgba(255,255,255,0.04),
+    inset 0 0 26px rgba(212, 175, 55, 0.16);
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: rotateX(4deg);
 }
 
 .chair-tufting {
@@ -1146,43 +1155,47 @@ body {
 .welcome-chair-star {
   position: relative;
   color: #d4af37;
-  font-size: 26px;
-  opacity: 0.75;
-  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+  font-size: 36px;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.55));
   z-index: 1;
 }
 
 .welcome-chair-armrest {
   position: absolute;
-  bottom: 40px;
-  width: 18px;
-  height: 60px;
-  border-radius: 10px;
-  background: linear-gradient(160deg, #1c1c1c, #050505);
-  border: 2px solid #d4af37;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+  bottom: 54px;
+  width: 26px;
+  height: 84px;
+  border-radius: 13px;
+  background: linear-gradient(155deg, #2a2a2a, #050505);
+  border: 3px solid #d4af37;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.55), inset -4px 0 8px rgba(0,0,0,0.4);
   z-index: 1;
 }
 
-.welcome-chair-armrest.left { left: 4px; }
-.welcome-chair-armrest.right { right: 4px; }
+.welcome-chair-armrest.left { left: -2px; transform: rotateY(8deg); }
+.welcome-chair-armrest.right { right: -2px; transform: rotateY(-8deg); }
 
 .welcome-chair-seat {
   position: relative;
   bottom: 0;
-  width: 150px;
-  height: 58px;
-  border-radius: 16px;
-  background: linear-gradient(160deg, #232323, #050505 70%);
-  border: 3px solid #d4af37;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
+  width: 210px;
+  height: 78px;
+  border-radius: 20px;
+  background: linear-gradient(155deg, #2e2e2e 0%, #161616 45%, #050505 100%);
+  border: 4px solid #d4af37;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.6),
+    inset 0 8px 14px rgba(255,255,255,0.05),
+    inset 0 -8px 14px rgba(0,0,0,0.4);
+  transform: rotateX(-6deg);
 }
 
 .welcome-start-btn {
   position: absolute;
-  bottom: 16px;
-  width: 126px;
-  padding: 13px 0;
+  bottom: 24px;
+  width: 150px;
+  padding: 14px 0;
   border: none;
   border-radius: 12px;
   background: linear-gradient(135deg, #ffe98a, #d4a017);
