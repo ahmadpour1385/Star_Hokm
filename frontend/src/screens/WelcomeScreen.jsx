@@ -77,50 +77,31 @@ export default function WelcomeScreen({ onSelectCreate, onSelectJoin, onOpenProf
           </div>
         ))}
 
-        <div className="welcome-chair-wrap">
-          <div className="welcome-chair-back">
-            <div className="chair-tufting">
-              {Array.from({ length: 6 }).map((_, i) => <span key={i} />)}
-            </div>
-            <span className="welcome-chair-star">✦</span>
+        <div className="welcome-board-wrap">
+          <div className="board-jokers">
+            <span className="board-joker j1">🃏</span>
+            <span className="board-joker j2">🃏</span>
+            <span className="board-joker j3">🃏</span>
           </div>
 
-                    {/* آدمک نشسته با دست‌های باز */}
-          <div className="chair-character">
-            <div className="char-head">
-              <svg viewBox="0 0 40 40" className="char-face">
-                <circle cx="14" cy="17" r="2.4" fill="#0b1410" />
-                <circle cx="27" cy="17" r="2.4" fill="#0b1410" />
-                <path d="M12 25 Q20 34 30 22" stroke="#0b1410" strokeWidth="2.6" fill="none" strokeLinecap="round" />
-              </svg>
+          <div className="welcome-board">
+            <div className="board-lights">
+              {Array.from({ length: 14 }).map((_, i) => <span key={i} />)}
             </div>
-            <div className="char-body" />
-            <div className="char-leg one" />
-            <div className="char-leg two" />
-            <div className="char-arm left" />
-            <div className="char-arm right" />
-            <div className="char-hand left" />
-            <div className="char-hand right" />
-          </div>
 
-          <button className="chair-hand-btn left" onClick={onSelectJoin}>
-            🔑 Join Room
-          </button>
-          <button className="chair-hand-btn right" onClick={onSelectCreate}>
-            ➕ Create Room
-          </button>
-
-          <div className="welcome-chair-armrest left" />
-          <div className="welcome-chair-armrest right" />
-          <div className="welcome-chair-seat">
-            <div className="chair-tufting seat-tufting">
-              {Array.from({ length: 4 }).map((_, i) => <span key={i} />)}
+            <div className="board-star-row">
+              <span>✦</span>
+              <span className="board-title">STAR HOKM</span>
+              <span>✦</span>
             </div>
+
+            <button className="board-btn board-btn-create" onClick={onSelectCreate}>
+              ➕ Create Room
+            </button>
+            <button className="board-btn board-btn-join" onClick={onSelectJoin}>
+              🔑 Join Room
+            </button>
           </div>
-          <div className="chair-leg-support front-left" />
-          <div className="chair-leg-support front-right" />
-          <div className="chair-leg-support back-left" />
-          <div className="chair-leg-support back-right" />
         </div>
       </div>
     </div>
