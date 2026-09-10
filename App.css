@@ -955,8 +955,8 @@ body {
 .fc-5 { top: 44%; left: -2%; --r: -6deg; animation-delay: 2.4s; }
 
 @keyframes floatCard {
-  0%, 100% { transform: scale(var(--s)) rotate(var(--r)) translateY(0); }
-  50% { transform: scale(var(--s)) rotate(var(--r)) translateY(-12px); }
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -12px; }
 }
 
 @keyframes floatCard {
