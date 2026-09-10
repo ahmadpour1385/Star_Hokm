@@ -85,9 +85,18 @@ export default function WelcomeScreen({ onSelectCreate, onSelectJoin, onOpenProf
             <span className="welcome-chair-star">✦</span>
           </div>
 
+                    {/* آدمک نشسته با دست‌های باز */}
           <div className="chair-character">
-            <div className="char-head" />
+            <div className="char-head">
+              <svg viewBox="0 0 40 40" className="char-face">
+                <circle cx="14" cy="17" r="2.4" fill="#0b1410" />
+                <circle cx="27" cy="17" r="2.4" fill="#0b1410" />
+                <path d="M12 25 Q20 34 30 22" stroke="#0b1410" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+              </svg>
+            </div>
             <div className="char-body" />
+            <div className="char-leg one" />
+            <div className="char-leg two" />
             <div className="char-arm left" />
             <div className="char-arm right" />
             <div className="char-hand left" />
@@ -108,6 +117,10 @@ export default function WelcomeScreen({ onSelectCreate, onSelectJoin, onOpenProf
               {Array.from({ length: 4 }).map((_, i) => <span key={i} />)}
             </div>
           </div>
+          <div className="chair-leg-support front-left" />
+          <div className="chair-leg-support front-right" />
+          <div className="chair-leg-support back-left" />
+          <div className="chair-leg-support back-right" />
         </div>
       </div>
     </div>

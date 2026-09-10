@@ -1343,8 +1343,124 @@ body {
   transform: scale(0.94);
 }
 
-.chair-hand-btn.left { left: -34px; transform: rotate(10deg); }
-.chair-hand-btn.right { right: -34px; transform: rotate(-10deg); }
+.chair-hand-btn.left { left: -46px; transform: rotate(10deg); }
+.chair-hand-btn.right { right: -46px; transform: rotate(-10deg); }
 
 .chair-hand-btn.left:active { transform: rotate(10deg) scale(0.94); }
 .chair-hand-btn.right:active { transform: rotate(-10deg) scale(0.94); }
+/* ---------- Character (updated: bigger, green, crossed legs, smile) ---------- */
+
+.chair-character {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 130px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.char-head {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, #3f8f68, #17422f);
+  border: 2px solid #d4af37;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+}
+
+.char-face {
+  width: 100%;
+  height: 100%;
+}
+
+.char-body {
+  position: absolute;
+  top: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 64px;
+  border-radius: 22px 22px 14px 14px;
+  background: linear-gradient(160deg, #3f8f68, #143d2c);
+  border: 2px solid #d4af37;
+}
+
+.char-leg {
+  position: absolute;
+  top: 92px;
+  left: 50%;
+  width: 44px;
+  height: 16px;
+  border-radius: 8px;
+  background: linear-gradient(160deg, #3f8f68, #143d2c);
+  border: 2px solid #d4af37;
+}
+
+.char-leg.one {
+  transform: translateX(-70%) rotate(18deg);
+  z-index: 2;
+}
+
+.char-leg.two {
+  transform: translateX(-30%) rotate(-14deg);
+  z-index: 3;
+}
+
+.char-arm {
+  position: absolute;
+  top: 46px;
+  width: 56px;
+  height: 10px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #3f8f68, #143d2c);
+  border: 2px solid #d4af37;
+}
+
+.char-arm.left {
+  left: -48px;
+  transform: rotate(20deg);
+  transform-origin: right center;
+}
+
+.char-arm.right {
+  right: -48px;
+  transform: rotate(-20deg);
+  transform-origin: left center;
+}
+
+.char-hand {
+  position: absolute;
+  top: 58px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, #3f8f68, #17422f);
+  border: 2px solid #d4af37;
+}
+
+.char-hand.left { left: -92px; }
+.char-hand.right { right: -92px; }
+
+/* ---------- Chair legs ---------- */
+
+.chair-leg-support {
+  position: absolute;
+  bottom: -34px;
+  width: 12px;
+  height: 40px;
+  background: linear-gradient(180deg, #2a2a2a, #050505);
+  border: 2px solid #d4af37;
+  border-radius: 3px;
+  z-index: 0;
+}
+
+.chair-leg-support.front-left { left: 30px; }
+.chair-leg-support.front-right { right: 30px; }
+.chair-leg-support.back-left { left: 54px; opacity: 0.6; height: 34px; }
+.chair-leg-support.back-right { right: 54px; opacity: 0.6; height: 34px; }
