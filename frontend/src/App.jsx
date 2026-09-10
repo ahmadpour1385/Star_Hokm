@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { GameProvider, useGame } from "./context/GameContext";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-import HomeScreen from "./screens/HomeScreen";
 import CreateRoomScreen from "./screens/CreateRoomScreen";
 import JoinRoomScreen from "./screens/JoinRoomScreen";
 import LobbyScreen from "./screens/LobbyScreen";
@@ -26,7 +25,7 @@ function AppContent() {
   }, [pendingSession]);
 
   useEffect(() => {
-    if (gameStarted && (screen === "lobby" || screen === "home" || screen === "welcome")) {
+    if (gameStarted && (screen === "lobby" || screen === "welcome")) {
       setScreen("game");
     }
   }, [gameStarted, screen]);
@@ -49,7 +48,8 @@ function AppContent() {
   if (screen === "welcome") {
     return (
       <WelcomeScreen
-        onStart={() => setScreen("home")}
+        onSelectCreate={() => setScreen("create")}
+        onSelectJoin={() => setScreen("join")}
         onOpenProfile={() => setScreen("profile")}
       />
     );
@@ -57,14 +57,11 @@ function AppContent() {
   if (screen === "profile") {
     return <ProfileScreen onBack={() => setScreen("welcome")} />;
   }
-  if (screen === "home") {
-    return <HomeScreen onSelectCreate={() => setScreen("create")} onSelectJoin={() => setScreen("join")} />;
-  }
   if (screen === "create") {
-    return <CreateRoomScreen onBack={() => setScreen("home")} onRoomJoined={() => setScreen("lobby")} />;
+    return <CreateRoomScreen onBack={() => setScreen("welcome")} onRoomJoined={() => setScreen("lobby")} />;
   }
   if (screen === "join") {
-    return <JoinRoomScreen onBack={() => setScreen("home")} onRoomJoined={() => setScreen("lobby")} />;
+    return <JoinRoomScreen onBack={() => setScreen("welcome")} onRoomJoined={() => setScreen("lobby")} />;
   }
   if (screen === "lobby") {
     return <LobbyScreen onGameStarted={() => setScreen("game")} />;

@@ -10,7 +10,7 @@ const FLOATING_CARDS = [
   { id: "back-2", cls: "fc-5", faceDown: true },
 ];
 
-export default function WelcomeScreen({ onStart, onOpenProfile }) {
+export default function WelcomeScreen({ onSelectCreate, onSelectJoin, onOpenProfile }) {
   const [profile, setProfile] = useState(getProfile());
   const [editing, setEditing] = useState(false);
   const [nameInput, setNameInput] = useState(profile.displayName);
@@ -84,6 +84,23 @@ export default function WelcomeScreen({ onStart, onOpenProfile }) {
             </div>
             <span className="welcome-chair-star">✦</span>
           </div>
+
+          <div className="chair-character">
+            <div className="char-head" />
+            <div className="char-body" />
+            <div className="char-arm left" />
+            <div className="char-arm right" />
+            <div className="char-hand left" />
+            <div className="char-hand right" />
+          </div>
+
+          <button className="chair-hand-btn left" onClick={onSelectJoin}>
+            🔑 Join Room
+          </button>
+          <button className="chair-hand-btn right" onClick={onSelectCreate}>
+            ➕ Create Room
+          </button>
+
           <div className="welcome-chair-armrest left" />
           <div className="welcome-chair-armrest right" />
           <div className="welcome-chair-seat">
@@ -91,9 +108,6 @@ export default function WelcomeScreen({ onStart, onOpenProfile }) {
               {Array.from({ length: 4 }).map((_, i) => <span key={i} />)}
             </div>
           </div>
-          <button className="welcome-start-btn" onClick={onStart}>
-            ▶ Start Game
-          </button>
         </div>
       </div>
     </div>
