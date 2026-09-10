@@ -1669,3 +1669,9 @@ body {
   font-size: 13px;
   margin-top: 4px;
 }
+.profile-name-error {
+  color: #ff6b6b;
+  font-size: 11px;
+  margin-top: 4px;
+  display: block;
+}

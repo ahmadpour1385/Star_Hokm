@@ -1,6 +1,12 @@
 const PROFILE_KEY = "starHokmProfile";
 
+function generatePlayerId() {
+  if (crypto?.randomUUID) return crypto.randomUUID();
+  return "p_" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+}
+
 const DEFAULT_PROFILE = {
+  playerId: null,
   displayName: "",
   bio: "",
   gamesPlayed: 0,
@@ -11,9 +17,16 @@ const DEFAULT_PROFILE = {
 export function getProfile() {
   try {
     const raw = localStorage.getItem(PROFILE_KEY);
-    return raw ? { ...DEFAULT_PROFILE, ...JSON.parse(raw) } : { ...DEFAULT_PROFILE };
+    const parsed = raw ? { ...DEFAULT_PROFILE, ...JSON.parse(raw) } : { ...DEFAULT_PROFILE };
+    if (!parsed.playerId) {
+      parsed.playerId = generatePlayerId();
+      saveProfile(parsed);
+    }
+    return parsed;
   } catch {
-    return { ...DEFAULT_PROFILE };
+    const fresh = { ...DEFAULT_PROFILE, playerId: generatePlayerId() };
+    saveProfile(fresh);
+    return fresh;
   }
 }
 
@@ -23,7 +36,7 @@ function saveProfile(profile) {
   } catch {}
 }
 
-export function saveDisplayName(name) {
+export function setLocalDisplayName(name) {
   const profile = getProfile();
   profile.displayName = name;
   saveProfile(profile);

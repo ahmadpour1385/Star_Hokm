@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { getProfile, saveDisplayName } from "../utils/profile";
+import { getProfile, setLocalDisplayName } from "../utils/profile";
+import { claimDisplayName } from "../ws/api";
 import Card from "../components/Card";
 import BottomNav from "../components/BottomNav";
 
@@ -16,12 +17,24 @@ export default function WelcomeScreen({ onSelectCreate, onSelectJoin, onOpenProf
   const [editing, setEditing] = useState(false);
   const [nameInput, setNameInput] = useState(profile.displayName);
 
-  function handleSaveName(e) {
+  const [nameError, setNameError] = useState("");
+
+  async function handleSaveName(e) {
     e?.stopPropagation();
-    const trimmed = nameInput.trim() || "Player";
-    const updated = saveDisplayName(trimmed);
-    setProfile(updated);
-    setEditing(false);
+    const trimmed = nameInput.trim();
+    if (!trimmed) {
+      setEditing(false);
+      return;
+    }
+    try {
+      const confirmedName = await claimDisplayName(profile.playerId, trimmed);
+      const updated = setLocalDisplayName(confirmedName);
+      setProfile(updated);
+      setNameError("");
+      setEditing(false);
+    } catch (err) {
+      setNameError(err.message);
+    }
   }
 
   return (
@@ -33,15 +46,18 @@ export default function WelcomeScreen({ onSelectCreate, onSelectJoin, onOpenProf
 
         <div className="profile-info">
           {editing ? (
-            <input
-              className="profile-name-input"
-              value={nameInput}
-              autoFocus
-              onClick={(e) => e.stopPropagation()}
-              onChange={(e) => setNameInput(e.target.value)}
-              onBlur={handleSaveName}
-              onKeyDown={(e) => e.key === "Enter" && handleSaveName(e)}
-            />
+            <>
+              <input
+                className="profile-name-input"
+                value={nameInput}
+                autoFocus
+                onClick={(e) => e.stopPropagation()}
+                onChange={(e) => setNameInput(e.target.value)}
+                onBlur={handleSaveName}
+                onKeyDown={(e) => e.key === "Enter" && handleSaveName(e)}
+              />
+              {nameError && <span className="profile-name-error">{nameError}</span>}
+            </>
           ) : (
             <div
               className="profile-name-row"

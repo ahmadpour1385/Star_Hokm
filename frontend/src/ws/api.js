@@ -48,6 +48,25 @@ export function createRoom({ ownerUserId, ownerDisplayName, password, roundsToWi
   });
 }
 
+export async function claimDisplayName(playerId, displayName) {
+  const res = await fetch(`${API_BASE_URL}/profiles/claim-name`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ player_id: playerId, display_name: displayName }),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.detail || "این نام قبلاً گرفته شده");
+  }
+  return data.display_name;
+}
+
+export async function searchDisplayNames(query) {
+  const res = await fetch(`${API_BASE_URL}/profiles/search?q=${encodeURIComponent(query)}`);
+  const data = await res.json();
+  return data.results || [];
+}
+
 export function joinRoom({ roomCode, password, userId, displayName }) {
   return postJson("/rooms/join", {
     room_code: roomCode,

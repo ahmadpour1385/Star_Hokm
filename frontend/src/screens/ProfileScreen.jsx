@@ -1,14 +1,26 @@
 import { useState } from "react";
-import { getProfile, saveDisplayName, saveBio } from "../utils/profile";
+import { useState } from "react";
+import { getProfile, setLocalDisplayName, saveBio } from "../utils/profile";
+import { claimDisplayName } from "../ws/api";
 
 export default function ProfileScreen({ onBack }) {
   const [profile, setProfile] = useState(getProfile());
   const [nameInput, setNameInput] = useState(profile.displayName);
   const [bioInput, setBioInput] = useState(profile.bio);
 
-  function commitName() {
-    const trimmed = nameInput.trim() || "Player";
-    setProfile(saveDisplayName(trimmed));
+  const [nameError, setNameError] = useState("");
+
+  async function commitName() {
+    const trimmed = nameInput.trim();
+    if (!trimmed) return;
+    try {
+      const confirmedName = await claimDisplayName(profile.playerId, trimmed);
+      setProfile(setLocalDisplayName(confirmedName));
+      setNameError("");
+    } catch (err) {
+      setNameError(err.message);
+      setNameInput(profile.displayName);
+    }
   }
 
   function commitBio() {
@@ -52,6 +64,7 @@ export default function ProfileScreen({ onBack }) {
             onBlur={commitName}
             placeholder="Your name"
           />
+          {nameError && <p className="profile-name-error" style={{ marginTop: -8 }}>{nameError}</p>}
 
           <label className="profile-field-label">Bio</label>
           <textarea
