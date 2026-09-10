@@ -13,8 +13,10 @@ from telegram import Update
 
 from app.bot.main import get_bot_application
 from app.core.config import settings
+from app.profiles.username_manager import username_manager
 from app.rooms.room_manager import room_manager
 from app.ws.handlers import handle_connection
+from fastapi.responses import JSONResponse
 
 app = FastAPI(title="Star Hokm API")
 
@@ -68,6 +70,10 @@ class JoinRoomRequest(BaseModel):
     user_id: int
     display_name: str
 
+class ClaimNameRequest(BaseModel):
+    player_id: str
+    display_name: str
+
 
 # ---------- مسیرهای HTTP ----------
 
@@ -100,6 +106,18 @@ def get_room(room_code: str):
         return {"error": "اتاقی با این کد پیدا نشد"}
     return room.to_public_dict()
 
+@app.post("/profiles/claim-name")
+def claim_name(payload: ClaimNameRequest):
+    try:
+        clean_name = username_manager.claim_name(payload.player_id, payload.display_name)
+    except ValueError as e:
+        return JSONResponse(status_code=409, content={"detail": str(e)})
+    return {"ok": True, "display_name": clean_name}
+
+
+@app.get("/profiles/search")
+def search_names(q: str = ""):
+    return {"results": username_manager.search(q)}
 
 # ---------- مسیر WebSocket ----------
 
