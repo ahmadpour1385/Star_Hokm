@@ -946,7 +946,7 @@ body {
 }
 
 .floating-card > * {
-  transform: scale(1.7) rotate(var(--r));
+  transform: rotate(var(--r));
 }
 
 .fc-1 { top: 4%; left: 8%; --r: -18deg; animation-delay: 0s; }

@@ -73,7 +73,7 @@ export default function WelcomeScreen({ onStart, onOpenProfile }) {
 
         {FLOATING_CARDS.map((c) => (
           <div key={c.cls} className={`floating-card ${c.cls}`}>
-            <Card cardId={c.faceDown ? undefined : c.id} faceDown={c.faceDown} small />
+            <Card cardId={c.faceDown ? undefined : c.id} faceDown={c.faceDown} />
           </div>
         ))}
 
