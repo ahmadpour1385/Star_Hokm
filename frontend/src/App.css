@@ -941,16 +941,23 @@ body {
 
 .floating-card {
   position: absolute;
+  --s: 1.7;
+  --r: 0deg;
   animation: floatCard 4.5s ease-in-out infinite;
   filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
-  transform: scale(1.7);
+  transform: scale(var(--s)) rotate(var(--r));
 }
 
-.fc-1 { top: 4%; left: 8%; transform: scale(1.7) rotate(-18deg); animation-delay: 0s; }
-.fc-2 { top: 8%; right: 6%; transform: scale(1.7) rotate(14deg); animation-delay: 0.6s; }
-.fc-3 { bottom: 22%; left: 2%; transform: scale(1.7) rotate(10deg); animation-delay: 1.2s; }
-.fc-4 { bottom: 16%; right: 4%; transform: scale(1.7) rotate(-12deg); animation-delay: 1.8s; }
-.fc-5 { top: 44%; left: -2%; transform: scale(1.7) rotate(-6deg); animation-delay: 2.4s; }
+.fc-1 { top: 4%; left: 8%; --r: -18deg; animation-delay: 0s; }
+.fc-2 { top: 8%; right: 6%; --r: 14deg; animation-delay: 0.6s; }
+.fc-3 { bottom: 22%; left: 2%; --r: 10deg; animation-delay: 1.2s; }
+.fc-4 { bottom: 16%; right: 4%; --r: -12deg; animation-delay: 1.8s; }
+.fc-5 { top: 44%; left: -2%; --r: -6deg; animation-delay: 2.4s; }
+
+@keyframes floatCard {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -12px; }
+}
 
 @keyframes floatCard {
   0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
