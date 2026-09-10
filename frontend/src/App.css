@@ -941,11 +941,12 @@ body {
 
 .floating-card {
   position: absolute;
-  --s: 1.7;
-  --r: 0deg;
   animation: floatCard 4.5s ease-in-out infinite;
   filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
-  transform: scale(var(--s)) rotate(var(--r));
+}
+
+.floating-card > * {
+  transform: scale(1.7) rotate(var(--r));
 }
 
 .fc-1 { top: 4%; left: 8%; --r: -18deg; animation-delay: 0s; }
