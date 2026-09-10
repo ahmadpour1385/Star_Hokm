@@ -3,6 +3,7 @@ import { useGame } from "../context/GameContext";
 import Card, { parseCardId, sortHand } from "../components/Card";
 import PlayerSeat from "../components/PlayerSeat";
 import Scoreboard from "../components/Scoreboard";
+import ConfirmBoard from "../components/ConfirmBoard";
 
 const SUITS = ["hearts", "diamonds", "clubs", "spades"];
 const SUIT_SYMBOLS = { hearts: "♥", diamonds: "♦", clubs: "♣", spades: "♠" };
@@ -85,23 +86,15 @@ export default function GameScreen({ onBackToHome }) {
         </button>
       )}
 
-      {showEndConfirm && (
-        <div className="hokm-modal-backdrop">
-          <div className="hokm-modal">
-            <h3>End Game?</h3>
-            <p style={{ marginBottom: 16 }}>
-              This will close the room for everyone and end the game immediately. This cannot be undone.
-            </p>
-            <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
-              <button className="btn btn-secondary" onClick={() => setShowEndConfirm(false)}>
-                Cancel
-              </button>
-              <button className="btn btn-primary" onClick={endGame}>
-                Yes, End Game
-              </button>
-            </div>
-          </div>
-        </div>
+       {showEndConfirm && (
+        <ConfirmBoard
+          title="END GAME"
+          message="This will close the room for everyone and end the game immediately. This cannot be undone."
+          confirmLabel="Yes, End Game"
+          cancelLabel="Cancel"
+          onCancel={() => setShowEndConfirm(false)}
+          onConfirm={endGame}
+        />
       )}
 
       <div className="game-table-wrapper">

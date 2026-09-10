@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useGame } from "../context/GameContext";
+import ConfirmBoard from "../components/ConfirmBoard";
 
 const TEAM_LABELS = { 0: "Team A", 1: "Team B" };
 const TEAM_SEATS = { 0: [0, 2], 1: [1, 3] };
@@ -107,22 +108,14 @@ export default function LobbyScreen({ onGameStarted }) {
       )}
 
       {showEndConfirm && (
-        <div className="hokm-modal-backdrop">
-          <div className="hokm-modal">
-            <h3>Close Room?</h3>
-            <p style={{ marginBottom: 16 }}>
-              This will close the room for everyone. This cannot be undone.
-            </p>
-            <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
-              <button className="btn btn-secondary" onClick={() => setShowEndConfirm(false)}>
-                Cancel
-              </button>
-              <button className="btn btn-primary" onClick={endGame}>
-                Yes, Close Room
-              </button>
-            </div>
-          </div>
-        </div>
+        <ConfirmBoard
+          title="CLOSE ROOM"
+          message="This will close the room for everyone. This cannot be undone."
+          confirmLabel="Yes, Close Room"
+          cancelLabel="Cancel"
+          onCancel={() => setShowEndConfirm(false)}
+          onConfirm={endGame}
+        />
       )}
     </div>
   );
