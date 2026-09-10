@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { GameProvider, useGame } from "./context/GameContext";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import ComingSoonScreen from "./screens/ComingSoonScreen";
 import CreateRoomScreen from "./screens/CreateRoomScreen";
 import JoinRoomScreen from "./screens/JoinRoomScreen";
 import LobbyScreen from "./screens/LobbyScreen";
@@ -45,14 +46,26 @@ function AppContent() {
     );
   }
 
+  function handleTabSelect(tab) {
+    if (tab === "home") {
+      setScreen("welcome");
+    } else {
+      setScreen(tab); // shop | friends | clan | ranking
+    }
+  }
+
   if (screen === "welcome") {
     return (
       <WelcomeScreen
         onSelectCreate={() => setScreen("create")}
         onSelectJoin={() => setScreen("join")}
         onOpenProfile={() => setScreen("profile")}
+        onSelectTab={handleTabSelect}
       />
     );
+  }
+  if (["shop", "friends", "clan", "ranking"].includes(screen)) {
+    return <ComingSoonScreen tab={screen} onSelectTab={handleTabSelect} />;
   }
   if (screen === "profile") {
     return <ProfileScreen onBack={() => setScreen("welcome")} />;

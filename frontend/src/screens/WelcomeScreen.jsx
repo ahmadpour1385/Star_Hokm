@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getProfile, saveDisplayName } from "../utils/profile";
 import Card from "../components/Card";
+import BottomNav from "../components/BottomNav";
 
 const FLOATING_CARDS = [
   { id: "A-spades", cls: "fc-1", faceDown: false },
@@ -10,7 +11,7 @@ const FLOATING_CARDS = [
   { id: "back-2", cls: "fc-5", faceDown: true },
 ];
 
-export default function WelcomeScreen({ onSelectCreate, onSelectJoin, onOpenProfile }) {
+export default function WelcomeScreen({ onSelectCreate, onSelectJoin, onOpenProfile, onSelectTab }) {
   const [profile, setProfile] = useState(getProfile());
   const [editing, setEditing] = useState(false);
   const [nameInput, setNameInput] = useState(profile.displayName);
@@ -102,8 +103,10 @@ export default function WelcomeScreen({ onSelectCreate, onSelectJoin, onOpenProf
               🔑 Join Room
             </button>
           </div>
-        </div>
+       </div>
       </div>
+
+      <BottomNav activeTab="home" onSelectTab={onSelectTab} />
     </div>
   );
 }
