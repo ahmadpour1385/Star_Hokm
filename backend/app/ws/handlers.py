@@ -41,7 +41,9 @@ async def handle_connection(websocket: WebSocket, room_code: str, user_id: int) 
     except WebSocketDisconnect:
         connection_manager.disconnect(room_code, user_id)
         # بازیکن رو از room.players حذف نمی‌کنیم تا بتونه دوباره وصل بشه،
-        # ولی همه رو مطلع می‌کنیم که این بازیکن الان آفلاینه
+        # ولی اگه سازنده اتاق بود، مالکیت رو به اولین بازیکن آنلاین بعدی منتقل می‌کنیم
+        if user_id == room.owner_user_id:
+            _transfer_ownership_if_needed(room)
         await _broadcast_room_update(room)
 
 
@@ -196,6 +198,38 @@ async def _handle_end_game(room: Room, user_id: int, data: dict) -> None:
 
 
 # ---------- کمکی‌های داخلی ----------
+
+def _transfer_ownership_if_needed(room: Room) -> None:
+    """اگه سازنده اتاق دیسکانکت بشه، مالکیت به اولین بازیکن آنلاین بعدی (راست‌گرد) منتقل میشه"""
+    owner_id = room.owner_user_id
+    owner_player = room.players.get(owner_id)
+    if owner_player is None:
+        return
+
+    online_ids = set(connection_manager.connected_user_ids(room.room_code))
+    new_owner = None
+
+    if owner_player.seat is not None:
+        seats = sorted(p.seat for p in room.players.values() if p.seat is not None)
+        idx = seats.index(owner_player.seat)
+        ordered_seats = seats[idx + 1:] + seats[:idx]
+        players_by_seat = {p.seat: p for p in room.players.values() if p.seat is not None}
+        for seat in ordered_seats:
+            candidate = players_by_seat.get(seat)
+            if candidate and candidate.user_id in online_ids:
+                new_owner = candidate
+                break
+    else:
+        candidates = [p for p in room.players.values() if p.user_id != owner_id and p.user_id in online_ids]
+        if candidates:
+            new_owner = candidates[0]
+
+    if new_owner is None:
+        return
+
+    owner_player.is_room_owner = False
+    room.owner_user_id = new_owner.user_id
+    new_owner.is_room_owner = True
 
 def _player_by_seat(room: Room, seat: int):
     for p in room.players.values():
