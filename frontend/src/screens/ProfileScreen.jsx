@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useState } from "react";
 import { getProfile, setLocalDisplayName, saveBio } from "../utils/profile";
 import { claimDisplayName } from "../ws/api";
 
