@@ -86,7 +86,7 @@ export default function GameScreen({ onBackToHome }) {
         </button>
       )}
 
-       {showEndConfirm && (
+      {showEndConfirm && (
         <ConfirmBoard
           title="END GAME"
           message="This will close the room for everyone and end the game immediately. This cannot be undone."
@@ -149,45 +149,6 @@ export default function GameScreen({ onBackToHome }) {
               ))}
             </div>
           </div>
-
-          <div className="seat-right-abs chair-slot">
-            <div className="chair-back" />
-            <PlayerSeat
-              player={playerBySeat[(mySeat + 1) % 4]}
-              isHakem={hakemSeat === (mySeat + 1) % 4}
-              isCurrentTurn={currentTurnSeat === (mySeat + 1) % 4}
-              cardsCount={13}
-              position="right"
-              isOffline={playerBySeat[(mySeat + 1) % 4] && !room.connected_user_ids?.includes(playerBySeat[(mySeat + 1) % 4].user_id)}
-            />
-          </div>
-
-          <div className="seat-bottom-abs chair-slot">
-            <div className="chair-back" />
-            <PlayerSeat
-              player={me}
-              isHakem={hakemSeat === mySeat}
-              isCurrentTurn={isMyTurn}
-              cardsCount={myHand.length}
-              position="bottom"
-            />
-          </div>
-
-          <div className="table-center">
-            {tableCards.map((play, idx) => (
-              <div key={idx} className={`table-card table-card-${relativePosition(play.seat)}`}>
-                <Card cardId={play.card} />
-              </div>
-            ))}
-          </div>
-
-          <div className="won-tricks-pile">
-            {Array.from({ length: myTricks }).map((_, i) => (
-              <div key={i} className="won-trick-mini" />
-            ))}
-          </div>
-        </div>
-      </div>
 
           <div className="seat-right-abs chair-slot">
             <div className="chair-back" />
