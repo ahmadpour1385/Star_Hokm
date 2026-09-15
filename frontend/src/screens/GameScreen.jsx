@@ -103,8 +103,13 @@ export default function GameScreen({ onBackToHome }) {
 
           <div className="table-logo">
             <svg className="table-logo-star" viewBox="0 0 100 100">
-              <path d="M50 6 L44 20 L28 12 L36 27 L20 26 L33 36 L18 44 L34 46 L26 60 L40 52 L38 68 L50 56 L62 68 L60 52 L74 60 L66 46 L82 44 L67 36 L80 26 L64 27 L72 12 L56 20 Z" fill="#d4af37" opacity="0.92" />
-              <path d="M50 2c-2 4-2 8 0 11c2-3 2-7 0-11z" fill="#d90429" opacity="0.85" />
+              <polygon
+                points="50,6 61,38 95,38 67,58 78,90 50,70 22,90 33,58 5,38 39,38"
+                fill="none"
+                stroke="#b8891f"
+                strokeWidth="4"
+                strokeLinejoin="round"
+              />
             </svg>
             <div className="table-logo-suits">
               <span>♠</span><span>♦</span><span>♥</span><span>♣</span>

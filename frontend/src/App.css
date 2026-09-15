@@ -12,7 +12,7 @@ html, body, #root {
 }
 
 body {
-  background: radial-gradient(circle at center, #0b3d2e 0%, #062017 100%);
+  background: radial-gradient(circle at center, #0d4a34 0%, #041008 100%);
   font-family: "Poppins", sans-serif;
   overflow: hidden;
 }
@@ -349,20 +349,10 @@ body {
   padding: 30px 0;
 }
 
-.game-table-wrapper::before {
-  content: "";
-  position: absolute;
-  width: clamp(260px, 82vmin, 360px);
-  height: clamp(260px, 82vmin, 360px);
-  border-radius: 50%;
-  border: 1px dashed rgba(212, 175, 55, 0.18);
-  background: radial-gradient(circle, rgba(15, 92, 61, 0.25), transparent 70%);
-}
-
 .table-felt {
   position: relative;
-  width: clamp(150px, 44vmin, 200px);
-  height: clamp(150px, 44vmin, 200px);
+  width: clamp(230px, 68vmin, 320px);
+  height: clamp(230px, 68vmin, 320px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -372,17 +362,16 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: clamp(108px, 31vmin, 144px);
-  height: clamp(108px, 31vmin, 144px);
+  width: clamp(172px, 50vmin, 232px);
+  height: clamp(172px, 50vmin, 232px);
   transform: translate(-50%, -50%) rotate(45deg);
-  border-radius: 20px;
-  background: radial-gradient(ellipse at 35% 30%, #161616 0%, #050505 75%);
-  border: 4px solid #d4af37;
+  border-radius: 18px;
+  background: #0a0a0a;
+  border: 5px solid #b8891f;
   box-shadow:
     0 0 0 2px #050505,
-    0 0 0 7px rgba(212, 175, 55, 0.5),
-    0 12px 30px rgba(0, 0, 0, 0.6),
-    inset 0 0 30px rgba(0, 0, 0, 0.55);
+    0 0 0 8px rgba(184, 137, 31, 0.4),
+    0 14px 32px rgba(0, 0, 0, 0.65);
   z-index: 0;
 }
 
@@ -441,12 +430,12 @@ body {
 
 .chair-back {
   position: absolute;
-  width: clamp(44px, 15vmin, 62px);
-  height: clamp(44px, 15vmin, 62px);
-  border-radius: 16px;
-  background: linear-gradient(160deg, #1c1c1c, #050505);
-  border: 2px solid #d4af37;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.55), inset 0 0 10px rgba(212, 175, 55, 0.12);
+  width: clamp(50px, 16vmin, 68px);
+  height: clamp(50px, 16vmin, 68px);
+  border-radius: 50%;
+  background: #101010;
+  border: 3px solid #b8891f;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.6);
   z-index: 0;
 }
 
@@ -457,28 +446,28 @@ body {
 
 .seat-top-abs {
   position: absolute;
-  top: clamp(-114px, -34vmin, -90px);
+  top: clamp(-158px, -46vmin, -122px);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .seat-left-abs {
   position: absolute;
-  left: clamp(-114px, -34vmin, -90px);
+  left: clamp(-158px, -46vmin, -122px);
   top: 50%;
   transform: translateY(-50%);
 }
 
 .seat-right-abs {
   position: absolute;
-  right: clamp(-114px, -34vmin, -90px);
+  right: clamp(-158px, -46vmin, -122px);
   top: 50%;
   transform: translateY(-50%);
 }
 
 .seat-bottom-abs {
   position: absolute;
-  bottom: clamp(-114px, -34vmin, -90px);
+  bottom: clamp(-158px, -46vmin, -122px);
   left: 50%;
   transform: translateX(-50%);
 }
