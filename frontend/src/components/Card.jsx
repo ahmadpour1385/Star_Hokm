@@ -100,10 +100,12 @@ export default function Card({ cardId, faceDown = false, disabled = false, onCli
         <div className="card-center-suit">{symbol}</div>
       )}
 
-      <div className="card-corner card-corner-bottom">
-        <span className="card-rank">{rank}</span>
-        <span className="card-suit">{symbol}</span>
-      </div>
+      {!isFace && (
+        <div className="card-corner card-corner-bottom">
+          <span className="card-rank">{rank}</span>
+          <span className="card-suit">{symbol}</span>
+        </div>
+      )}
     </div>
   );
 }

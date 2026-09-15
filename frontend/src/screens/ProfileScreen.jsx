@@ -56,14 +56,27 @@ export default function ProfileScreen({ onBack }) {
           </div>
 
           <label className="profile-field-label">Display Name</label>
-          <input
-            className="profile-field-input"
-            value={nameInput}
-            onChange={(e) => setNameInput(e.target.value)}
-            onBlur={commitName}
-            placeholder="Your name"
-          />
-          {nameError && <p className="profile-name-error" style={{ marginTop: -8 }}>{nameError}</p>}
+          <div className="profile-name-edit-row">
+            <input
+              className="profile-field-input"
+              style={{ marginBottom: 0 }}
+              value={nameInput}
+              onChange={(e) => setNameInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && commitName()}
+              placeholder="Your name"
+            />
+            <button className="name-confirm-btn" onClick={commitName}>✓</button>
+            <button
+              className="name-cancel-btn"
+              onClick={() => {
+                setNameInput(profile.displayName);
+                setNameError("");
+              }}
+            >
+              ✕
+            </button>
+          </div>
+          {nameError && <p className="profile-name-error" style={{ marginTop: 4, marginBottom: 14 }}>{nameError}</p>}
 
           <label className="profile-field-label">Bio</label>
           <textarea

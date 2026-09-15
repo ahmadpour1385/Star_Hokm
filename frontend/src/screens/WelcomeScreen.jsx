@@ -47,15 +47,26 @@ export default function WelcomeScreen({ onSelectCreate, onSelectJoin, onOpenProf
         <div className="profile-info">
           {editing ? (
             <>
-              <input
-                className="profile-name-input"
-                value={nameInput}
-                autoFocus
-                onClick={(e) => e.stopPropagation()}
-                onChange={(e) => setNameInput(e.target.value)}
-                onBlur={handleSaveName}
-                onKeyDown={(e) => e.key === "Enter" && handleSaveName(e)}
-              />
+              <div className="profile-name-edit-row" onClick={(e) => e.stopPropagation()}>
+                <input
+                  className="profile-name-input"
+                  value={nameInput}
+                  autoFocus
+                  onChange={(e) => setNameInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSaveName(e)}
+                />
+                <button className="name-confirm-btn" onClick={handleSaveName}>✓</button>
+                <button
+                  className="name-cancel-btn"
+                  onClick={() => {
+                    setNameInput(profile.displayName);
+                    setNameError("");
+                    setEditing(false);
+                  }}
+                >
+                  ✕
+                </button>
+              </div>
               {nameError && <span className="profile-name-error">{nameError}</span>}
             </>
           ) : (

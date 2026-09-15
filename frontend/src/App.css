@@ -762,8 +762,8 @@ body {
 
 .card-back-crown {
   font-size: 13px;
-  color: #d90429;
-  filter: drop-shadow(0 0 3px rgba(217, 4, 41, 0.5));
+  color: #f5d76e;
+  filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.6));
 }
 
 .card-back-star {
@@ -1760,4 +1760,35 @@ body {
 .table-card .card {
   animation: cardFlipIn 0.32s ease-out;
   transform-style: preserve-3d;
+}
+.profile-name-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.name-confirm-btn,
+.name-cancel-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name-confirm-btn {
+  background: linear-gradient(135deg, #ffe98a, #d4a017);
+  color: #1a1200;
+}
+
+.name-cancel-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #d4af37;
 }
