@@ -365,6 +365,7 @@ body {
   width: clamp(156px, 42vmin, 200px);
   height: clamp(156px, 42vmin, 200px);
   transform: translate(-50%, -50%) rotate(45deg);
+}
 
 .table-logo {
   position: absolute;
