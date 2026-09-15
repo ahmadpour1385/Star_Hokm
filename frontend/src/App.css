@@ -376,30 +376,34 @@ body {
 }
 
 .table-logo {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1px;
+  gap: 2px;
   pointer-events: none;
   user-select: none;
 }
 
 .table-logo-star {
-  width: clamp(22px, 7vmin, 30px);
-  height: clamp(22px, 7vmin, 30px);
-  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
+  width: clamp(38px, 12vmin, 52px);
+  height: clamp(38px, 12vmin, 52px);
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
 }
 
 .table-logo-suits {
   display: flex;
-  gap: 3px;
-  font-size: clamp(6px, 1.8vmin, 8px);
-  color: #d4af37;
-  opacity: 0.65;
+  gap: 5px;
+  font-size: clamp(8px, 2.4vmin, 11px);
   margin-bottom: 1px;
 }
+
+.table-logo-suits .suit-red { color: #d90429; }
+.table-logo-suits .suit-gold { color: #d4af37; opacity: 0.85; }
 
 .table-logo-star-text {
   font-family: "Poppins", sans-serif;
@@ -446,28 +450,28 @@ body {
 
 .seat-top-abs {
   position: absolute;
-  top: clamp(-158px, -46vmin, -122px);
+  top: clamp(-128px, -37vmin, -98px);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .seat-left-abs {
   position: absolute;
-  left: clamp(-158px, -46vmin, -122px);
+  left: clamp(-128px, -37vmin, -98px);
   top: 50%;
   transform: translateY(-50%);
 }
 
 .seat-right-abs {
   position: absolute;
-  right: clamp(-158px, -46vmin, -122px);
+  right: clamp(-128px, -37vmin, -98px);
   top: 50%;
   transform: translateY(-50%);
 }
 
 .seat-bottom-abs {
   position: absolute;
-  bottom: clamp(-158px, -46vmin, -122px);
+  bottom: clamp(-128px, -37vmin, -98px);
   left: 50%;
   transform: translateX(-50%);
 }
@@ -1820,4 +1824,31 @@ body {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(212, 175, 55, 0.4);
   color: #d4af37;
+}
+/* ---------- Modals ---------- */
+
+.hokm-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 6, 5, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.hokm-modal {
+  background: #0b3d2e;
+  border: 2px solid #ffd700;
+  border-radius: 18px;
+  padding: 26px;
+  text-align: center;
+  color: #f5e6c8;
+  min-width: 260px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.hokm-modal h3 {
+  color: #ffd700;
+  margin-bottom: 10px;
 }
