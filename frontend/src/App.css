@@ -612,15 +612,18 @@ body {
   color: #1a1a1a;
 }
 
-/* ---------- Cards ---------- */
+/* ---------- Cards (Dark Luxury Royal) ---------- */
 
 .card {
   width: 42px;
   height: 62px;
-  border-radius: 7px;
-  background: radial-gradient(ellipse at 30% 20%, #fffdf6, #f3ead2 75%);
-  border: 1.2px solid #c9a227;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  background: radial-gradient(ellipse at 30% 15%, #1c1c1c, #0d0d0d 70%);
+  border: 1.4px solid #d4af37;
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(212, 175, 55, 0.25),
+    inset 0 0 10px rgba(212, 175, 55, 0.06);
   position: relative;
   display: flex;
   align-items: center;
@@ -634,44 +637,7 @@ body {
 .card-small {
   width: 26px;
   height: 38px;
-  border-radius: 5px;
-}
-
-.card-back {
-  background: radial-gradient(ellipse at center, #0f5c3d 0%, #06301f 75%);
-  border: 1.2px solid #c9a227;
-  cursor: default;
-}
-
-.card-back-pattern {
-  position: absolute;
-  inset: 2px;
-  border-radius: 5px;
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  background:
-    repeating-linear-gradient(45deg, rgba(212,175,55,0.10) 0 3px, transparent 3px 10px),
-    repeating-linear-gradient(-45deg, rgba(212,175,55,0.10) 0 3px, transparent 3px 10px);
-}
-
-.card-back-medallion {
-  position: relative;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #e8cf7a, #a8812a);
-  color: #1a1200;
-  font-size: 6.5px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 5px rgba(212, 175, 55, 0.6);
-}
-
-.card-small .card-back-medallion {
-  width: 10px;
-  height: 10px;
-  font-size: 4.5px;
+  border-radius: 6px;
 }
 
 .card-disabled {
@@ -679,8 +645,22 @@ body {
   cursor: not-allowed;
 }
 
-.card-face.red { color: #b5322a; }
-.card-face.black { color: #161310; }
+.card-face.red { color: #d90429; }
+.card-face.gold {
+  color: #f5d76e;
+  text-shadow: 0 0 4px rgba(212, 175, 55, 0.35);
+}
+
+.card-ornament {
+  position: absolute;
+  font-size: 6px;
+  color: #d4af37;
+  opacity: 0.45;
+  z-index: 1;
+}
+
+.card-ornament.tl { top: 2px; left: 2px; }
+.card-ornament.br { bottom: 2px; right: 2px; transform: rotate(180deg); }
 
 .card-corner {
   position: absolute;
@@ -700,10 +680,79 @@ body {
 
 .card-center-suit {
   font-size: 20px;
-  opacity: 0.32;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 3px currentColor);
 }
 
-.card-face-icon-wrap {
+.card-face-mirror {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
+  height: 74%;
+  z-index: 1;
+}
+
+.card-face-half {
+  width: 100%;
+  height: 38%;
+  opacity: 0.9;
+}
+
+.card-face-half.bottom {
+  transform: rotate(180deg);
+}
+
+.card-face-suit-mini {
+  font-size: 7px;
+  opacity: 0.8;
+}
+
+.card-small .card-rank { font-size: 6.5px; }
+.card-small .card-suit { font-size: 6px; }
+.card-small .card-center-suit { font-size: 12px; }
+.card-small .card-face-suit-mini { font-size: 5px; }
+.card-small .card-ornament { display: none; }
+
+/* ---------- Card Back (Dark Luxury Royal) ---------- */
+
+.card-back {
+  background: radial-gradient(ellipse at center, #141414 0%, #060606 80%);
+  border: 1.4px solid #d4af37;
+  cursor: default;
+}
+
+.card-back-border-ring {
+  position: absolute;
+  inset: 3px;
+  border-radius: 5px;
+  border: 1px solid rgba(212, 175, 55, 0.55);
+}
+
+.card-back-pattern {
+  position: absolute;
+  inset: 6px;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(45deg, rgba(212,175,55,0.10) 0 2px, transparent 2px 8px),
+    repeating-linear-gradient(-45deg, rgba(212,175,55,0.10) 0 2px, transparent 2px 8px);
+}
+
+.card-back-corner {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgba(212, 175, 55, 0.6);
+}
+
+.card-back-corner.tl { top: 4px; left: 4px; border-width: 1px 0 0 1px; }
+.card-back-corner.tr { top: 4px; right: 4px; border-width: 1px 1px 0 0; }
+.card-back-corner.bl { bottom: 4px; left: 4px; border-width: 0 0 1px 1px; }
+.card-back-corner.br { bottom: 4px; right: 4px; border-width: 0 1px 1px 0; }
+
+.card-back-medallion {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -711,29 +760,21 @@ body {
   z-index: 1;
 }
 
-.card-face-suit-mini {
-  font-size: 8px;
-  opacity: 0.55;
+.card-back-crown {
+  font-size: 13px;
+  color: #d90429;
+  filter: drop-shadow(0 0 3px rgba(217, 4, 41, 0.5));
 }
 
-.card-brand-star {
-  position: absolute;
-  top: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 6px;
-  color: #c9a227;
-  opacity: 0.7;
-  z-index: 2;
+.card-back-star {
+  font-size: 9px;
+  color: #f5d76e;
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
 }
 
-.card-small .card-rank { font-size: 6.5px; }
-.card-small .card-suit { font-size: 6px; }
-.card-small .card-center-suit { font-size: 12px; }
-.card-small .card-face-icon-wrap svg { width: 50%; height: 50%; }
-.card-small .card-face-suit-mini { font-size: 5.5px; }
-.card-small .card-brand-star { display: none; }
-
+.card-small .card-back-crown { font-size: 8px; }
+.card-small .card-back-star { font-size: 6px; }
+.card-small .card-back-corner { width: 4px; height: 4px; }
 /* ---------- Scoreboard ---------- */
 
 .scoreboard {
@@ -1708,4 +1749,15 @@ body {
   flex: 1;
   padding: 12px 0;
   font-size: 13px;
+}
+/* ---------- Card Flip Animation ---------- */
+
+@keyframes cardFlipIn {
+  0% { transform: rotateY(90deg) scale(0.85); opacity: 0.3; }
+  100% { transform: rotateY(0deg) scale(1); opacity: 1; }
+}
+
+.table-card .card {
+  animation: cardFlipIn 0.32s ease-out;
+  transform-style: preserve-3d;
 }
