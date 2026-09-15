@@ -65,16 +65,20 @@ export default function ProfileScreen({ onBack }) {
               onKeyDown={(e) => e.key === "Enter" && commitName()}
               placeholder="Your name"
             />
-            <button className="name-confirm-btn" onClick={commitName}>✓</button>
-            <button
-              className="name-cancel-btn"
-              onClick={() => {
-                setNameInput(profile.displayName);
-                setNameError("");
-              }}
-            >
-              ✕
-            </button>
+            {nameInput.trim() !== profile.displayName && (
+              <>
+                <button className="name-confirm-btn" onClick={commitName}>✓</button>
+                <button
+                  className="name-cancel-btn"
+                  onClick={() => {
+                    setNameInput(profile.displayName);
+                    setNameError("");
+                  }}
+                >
+                  ✕
+                </button>
+              </>
+            )}
           </div>
           {nameError && <p className="profile-name-error" style={{ marginTop: 4, marginBottom: 14 }}>{nameError}</p>}
 

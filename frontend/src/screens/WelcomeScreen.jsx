@@ -55,17 +55,21 @@ export default function WelcomeScreen({ onSelectCreate, onSelectJoin, onOpenProf
                   onChange={(e) => setNameInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSaveName(e)}
                 />
-                <button className="name-confirm-btn" onClick={handleSaveName}>✓</button>
-                <button
-                  className="name-cancel-btn"
-                  onClick={() => {
-                    setNameInput(profile.displayName);
-                    setNameError("");
-                    setEditing(false);
-                  }}
-                >
-                  ✕
-                </button>
+                {nameInput.trim() !== profile.displayName && (
+                  <>
+                    <button className="name-confirm-btn" onClick={handleSaveName}>✓</button>
+                    <button
+                      className="name-cancel-btn"
+                      onClick={() => {
+                        setNameInput(profile.displayName);
+                        setNameError("");
+                        setEditing(false);
+                      }}
+                    >
+                      ✕
+                    </button>
+                  </>
+                )}
               </div>
               {nameError && <span className="profile-name-error">{nameError}</span>}
             </>
