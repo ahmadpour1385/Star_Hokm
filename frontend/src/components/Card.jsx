@@ -78,9 +78,7 @@ export default function Card({ cardId, faceDown = false, disabled = false, onCli
       className={`card card-face ${color} ${disabled ? "card-disabled" : ""} ${small ? "card-small" : ""}`}
       onClick={!disabled ? onClick : undefined}
     >
-      <span className="card-ornament tl">❧</span>
-      <span className="card-ornament br">❧</span>
-
+    
       <div className="card-corner card-corner-top">
         <span className="card-rank">{rank}</span>
         <span className="card-suit">{symbol}</span>

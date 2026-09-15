@@ -651,14 +651,6 @@ body {
   text-shadow: 0 0 4px rgba(212, 175, 55, 0.35);
 }
 
-.card-ornament {
-  position: absolute;
-  font-size: 6px;
-  color: #d4af37;
-  opacity: 0.45;
-  z-index: 1;
-}
-
 .card-ornament.tl { top: 2px; left: 2px; }
 .card-ornament.br { bottom: 2px; right: 2px; transform: rotate(180deg); }
 
@@ -688,9 +680,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 6%;
   width: 60%;
-  height: 74%;
+  height: 62%;
   z-index: 1;
 }
 
