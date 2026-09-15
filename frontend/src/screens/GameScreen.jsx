@@ -99,13 +99,19 @@ export default function GameScreen({ onBackToHome }) {
 
       <div className="game-table-wrapper">
         <div className="table-felt">
-          <svg className="table-star" viewBox="0 0 100 100">
-            <polygon
-              points="50,4 61,37 96,37 68,58 78,92 50,71 22,92 32,58 4,37 39,37"
-              fill="#d4af37"
-              opacity="0.9"
-            />
-          </svg>
+          <div className="table-diamond-plate" />
+
+          <div className="table-logo">
+            <svg className="table-logo-star" viewBox="0 0 100 100">
+              <path d="M50 6 L44 20 L28 12 L36 27 L20 26 L33 36 L18 44 L34 46 L26 60 L40 52 L38 68 L50 56 L62 68 L60 52 L74 60 L66 46 L82 44 L67 36 L80 26 L64 27 L72 12 L56 20 Z" fill="#d4af37" opacity="0.92" />
+              <path d="M50 2c-2 4-2 8 0 11c2-3 2-7 0-11z" fill="#d90429" opacity="0.85" />
+            </svg>
+            <div className="table-logo-suits">
+              <span>♠</span><span>♦</span><span>♥</span><span>♣</span>
+            </div>
+            <span className="table-logo-star-text">STAR</span>
+            <span className="table-logo-hokm-text">HOKM</span>
+          </div>
 
           <div className="seat-top-abs chair-slot">
             <div className="chair-back" />
