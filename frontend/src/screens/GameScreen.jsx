@@ -100,6 +100,25 @@ export default function GameScreen({ onBackToHome }) {
       <div className="game-table-wrapper">
         <div className="table-felt">
           <div className="table-diamond-plate" />
+          <div className="table-outer-ring" />
+
+          <div className="ray-line ray-line-top" />
+          <div className="ray-line ray-line-bottom" />
+          <div className="ray-line ray-line-left" />
+          <div className="ray-line ray-line-right" />
+
+          <div className="ray-stars ray-stars-top">
+            <span>✦</span><span>✦</span><span>✦</span>
+          </div>
+          <div className="ray-stars ray-stars-bottom">
+            <span>✦</span><span>✦</span><span>✦</span>
+          </div>
+          <div className="ray-stars ray-stars-left">
+            <span>✦</span><span>✦</span><span>✦</span>
+          </div>
+          <div className="ray-stars ray-stars-right">
+            <span>✦</span><span>✦</span><span>✦</span>
+          </div>
 
           <div className="table-logo">
             <svg className="table-logo-star" viewBox="0 0 100 100">
@@ -129,6 +148,7 @@ export default function GameScreen({ onBackToHome }) {
               isCurrentTurn={currentTurnSeat === (mySeat + 2) % 4}
               cardsCount={13}
               position="top"
+              nameAbove={true}
               isOffline={playerBySeat[(mySeat + 2) % 4] && !room.connected_user_ids?.includes(playerBySeat[(mySeat + 2) % 4].user_id)}
             />
           </div>
@@ -141,6 +161,7 @@ export default function GameScreen({ onBackToHome }) {
               isCurrentTurn={currentTurnSeat === (mySeat + 3) % 4}
               cardsCount={13}
               position="left"
+              nameAbove={true}
               isOffline={playerBySeat[(mySeat + 3) % 4] && !room.connected_user_ids?.includes(playerBySeat[(mySeat + 3) % 4].user_id)}
             />
             <div className="opp-trick-pile">
@@ -158,6 +179,7 @@ export default function GameScreen({ onBackToHome }) {
               isCurrentTurn={currentTurnSeat === (mySeat + 1) % 4}
               cardsCount={13}
               position="right"
+              nameAbove={true}
               isOffline={playerBySeat[(mySeat + 1) % 4] && !room.connected_user_ids?.includes(playerBySeat[(mySeat + 1) % 4].user_id)}
             />
           </div>
