@@ -101,6 +101,7 @@ export default function GameScreen({ onBackToHome }) {
         <div className="table-felt">
           <div className="table-diamond-plate" />
           <div className="table-outer-ring" />
+          <div className="table-center-medallion" />
 
           <div className="ray-line ray-line-top" />
           <div className="ray-line ray-line-bottom" />
