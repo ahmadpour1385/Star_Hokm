@@ -61,8 +61,8 @@ export default function Card({ cardId, faceDown = false, disabled = false, onCli
         <div className="card-back-corner bl" />
         <div className="card-back-corner br" />
         <div className="card-back-medallion">
-          <span className="card-back-crown">♛</span>
-          <span className="card-back-star">✦</span>
+          <span className="card-back-star-hollow">☆</span>
+          <span className="card-back-star-hollow">☆</span>
         </div>
       </div>
     );

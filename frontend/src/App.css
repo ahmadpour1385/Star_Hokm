@@ -12,7 +12,10 @@ html, body, #root {
 }
 
 body {
-  background: radial-gradient(circle at center, #0d4a34 0%, #041008 100%);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.3), transparent 60%),
+    repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0.06) 0px, rgba(0,0,0,0.06) 1px, transparent 1px, transparent 3px),
+    radial-gradient(circle at center, #0a3a29 0%, #030b06 100%);
   font-family: "Poppins", sans-serif;
   overflow: hidden;
 }
@@ -779,8 +782,8 @@ body {
 /* ---------- Card Back (Dark Luxury Royal) ---------- */
 
 .card-back {
-  background: radial-gradient(ellipse at center, #141414 0%, #060606 80%);
-  border: 1.4px solid #d4af37;
+  background: radial-gradient(ellipse at 40% 30%, #3a3a3a 0%, #232323 75%);
+  border: 1.4px solid #766018;
   cursor: default;
 }
 
@@ -795,9 +798,8 @@ body {
   position: absolute;
   inset: 6px;
   border-radius: 4px;
-  background:
-    repeating-linear-gradient(45deg, rgba(212,175,55,0.10) 0 2px, transparent 2px 8px),
-    repeating-linear-gradient(-45deg, rgba(212,175,55,0.10) 0 2px, transparent 2px 8px);
+  background-image: radial-gradient(circle, rgba(184, 137, 31, 0.4) 0.6px, transparent 0.6px);
+  background-size: 6px 6px;
 }
 
 .card-back-corner {
@@ -821,10 +823,15 @@ body {
   z-index: 1;
 }
 
-.card-back-crown {
-  font-size: 13px;
-  color: #f5d76e;
-  filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.6));
+.card-back-star-hollow {
+  font-size: 11px;
+  color: #c9a227;
+  filter: drop-shadow(0 0 3px rgba(184, 137, 31, 0.5));
+  line-height: 1.1;
+}
+
+.card-small .card-back-star-hollow {
+  font-size: 7px;
 }
 
 .card-back-star {
@@ -1590,7 +1597,7 @@ body {
 .board-joker {
   position: absolute;
   font-size: 34px;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)) brightness(0.55) saturate(0.6);
 }
 
 .board-joker.j1 { left: 14%; top: 6px; transform: rotate(-16deg); }
