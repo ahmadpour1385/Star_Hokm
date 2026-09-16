@@ -478,7 +478,7 @@ body {
 
 .seat-top-abs {
   position: absolute;
-  top: clamp(-96px, -27vmin, -74px);
+  top: clamp(-74px, -21vmin, -56px);
   left: 50%;
   transform: translateX(-50%);
 }
@@ -499,7 +499,7 @@ body {
 
 .seat-bottom-abs {
   position: absolute;
-  bottom: clamp(-96px, -27vmin, -74px);
+  bottom: clamp(-74px, -21vmin, -56px);
   left: 50%;
   transform: translateX(-50%);
 }
@@ -1891,37 +1891,37 @@ body {
 
 .ray-line-top {
   --ray-dir: to bottom;
-  top: 12%;
+  top: 8%;
   left: 50%;
   width: 1.5px;
-  height: 28%;
+  height: 15%;
   transform: translateX(-50%);
 }
 
 .ray-line-bottom {
   --ray-dir: to top;
-  bottom: 12%;
+  bottom: 8%;
   left: 50%;
   width: 1.5px;
-  height: 28%;
+  height: 15%;
   transform: translateX(-50%);
 }
 
 .ray-line-left {
   --ray-dir: to right;
-  left: 12%;
+  left: 8%;
   top: 50%;
   height: 1.5px;
-  width: 28%;
+  width: 15%;
   transform: translateY(-50%);
 }
 
 .ray-line-right {
   --ray-dir: to left;
-  right: 12%;
+  right: 8%;
   top: 50%;
   height: 1.5px;
-  width: 28%;
+  width: 15%;
   transform: translateY(-50%);
 }
 
@@ -1938,33 +1938,33 @@ body {
 }
 
 .ray-stars-top {
-  top: 12%;
+  top: 8%;
   left: 50%;
-  height: 28%;
+  height: 15%;
   flex-direction: column;
   transform: translateX(-50%);
 }
 
 .ray-stars-bottom {
-  bottom: 12%;
+  bottom: 8%;
   left: 50%;
-  height: 28%;
+  height: 15%;
   flex-direction: column;
   transform: translateX(-50%);
 }
 
 .ray-stars-left {
-  left: 12%;
+  left: 8%;
   top: 50%;
-  width: 28%;
+  width: 15%;
   flex-direction: row;
   transform: translateY(-50%);
 }
 
 .ray-stars-right {
-  right: 12%;
+  right: 8%;
   top: 50%;
-  width: 28%;
+  width: 15%;
   flex-direction: row;
   transform: translateY(-50%);
 }
