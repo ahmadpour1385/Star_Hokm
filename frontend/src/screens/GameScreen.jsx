@@ -6,7 +6,7 @@ import Scoreboard from "../components/Scoreboard";
 import ConfirmBoard from "../components/ConfirmBoard";
 
 const SUITS = ["hearts", "diamonds", "clubs", "spades"];
-const SUIT_SYMBOLS = { hearts: "♥", diamonds: "♦", clubs: "♣", spades: "♠" };
+const SUIT_SYMBOLS = { hearts: "♥\uFE0E", diamonds: "♦\uFE0E", clubs: "♣\uFE0E", spades: "♠\uFE0E" };
 const SUIT_COLORS = { hearts: "red", diamonds: "red", clubs: "black", spades: "black" };
 
 export default function GameScreen({ onBackToHome }) {
@@ -132,10 +132,10 @@ export default function GameScreen({ onBackToHome }) {
               />
             </svg>
             <div className="table-logo-suits">
-              <span className="suit-gold">♠</span>
-              <span className="suit-red">♦</span>
-              <span className="suit-red">♥</span>
-              <span className="suit-gold">♣</span>
+              <span className="suit-gold">♠︎</span>
+              <span className="suit-red">♦︎</span>
+              <span className="suit-red">♥︎</span>
+              <span className="suit-gold">♣︎</span>
             </div>
             <span className="table-logo-star-text">STAR</span>
             <span className="table-logo-hokm-text">HOKM</span>

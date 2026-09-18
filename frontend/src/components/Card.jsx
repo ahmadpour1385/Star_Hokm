@@ -1,8 +1,8 @@
 const SUIT_SYMBOLS = {
-  hearts: "♥",
-  diamonds: "♦",
-  clubs: "♣",
-  spades: "♠",
+  hearts: "♥\uFE0E",
+  diamonds: "♦\uFE0E",
+  clubs: "♣\uFE0E",
+  spades: "♠\uFE0E",
 };
 
 const SUIT_COLORS = {
