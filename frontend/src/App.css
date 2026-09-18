@@ -737,9 +737,6 @@ body {
   text-shadow: 0 0 4px rgba(212, 175, 55, 0.35);
 }
 
-.card-ornament.tl { top: 2px; left: 2px; }
-.card-ornament.br { bottom: 2px; right: 2px; transform: rotate(180deg); }
-
 .card-corner {
   position: absolute;
   display: flex;
@@ -754,12 +751,20 @@ body {
 .card-corner-bottom { bottom: 3px; right: 4px; transform: rotate(180deg); }
 
 .card-rank { font-size: 9.5px; font-family: "Poppins", sans-serif; }
-.card-suit { font-size: 8.5px; }
+.card-suit {
+  font-size: 8.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .card-center-suit {
   font-size: 20px;
   opacity: 0.85;
   filter: drop-shadow(0 0 3px currentColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-face-mirror {
@@ -786,6 +791,9 @@ body {
 .card-face-suit-mini {
   font-size: 7px;
   opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-small .card-rank { font-size: 6.5px; }
@@ -852,14 +860,6 @@ body {
   font-size: 7px;
 }
 
-.card-back-star {
-  font-size: 9px;
-  color: #f5d76e;
-  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
-}
-
-.card-small .card-back-crown { font-size: 8px; }
-.card-small .card-back-star { font-size: 6px; }
 .card-small .card-back-corner { width: 4px; height: 4px; }
 /* ---------- Scoreboard ---------- */
 
