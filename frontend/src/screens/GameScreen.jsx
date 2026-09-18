@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useGame } from "../context/GameContext";
-import Card, { parseCardId, sortHand } from "../components/Card";
+import Card, { parseCardId, sortHand, SuitIcon } from "../components/Card";
 import PlayerSeat from "../components/PlayerSeat";
 import Scoreboard from "../components/Scoreboard";
 import ConfirmBoard from "../components/ConfirmBoard";
 
 const SUITS = ["hearts", "diamonds", "clubs", "spades"];
-const SUIT_SYMBOLS = { hearts: "♥\uFE0E", diamonds: "♦\uFE0E", clubs: "♣\uFE0E", spades: "♠\uFE0E" };
 const SUIT_COLORS = { hearts: "red", diamonds: "red", clubs: "black", spades: "black" };
 
 export default function GameScreen({ onBackToHome }) {
@@ -132,10 +131,10 @@ export default function GameScreen({ onBackToHome }) {
               />
             </svg>
             <div className="table-logo-suits">
-              <span className="suit-gold">♠︎</span>
-              <span className="suit-red">♦︎</span>
-              <span className="suit-red">♥︎</span>
-              <span className="suit-gold">♣︎</span>
+              <span className="suit-gold"><SuitIcon suit="spades" /></span>
+              <span className="suit-red"><SuitIcon suit="diamonds" /></span>
+              <span className="suit-red"><SuitIcon suit="hearts" /></span>
+              <span className="suit-gold"><SuitIcon suit="clubs" /></span>
             </div>
             <span className="table-logo-star-text">STAR</span>
             <span className="table-logo-hokm-text">HOKM</span>
@@ -233,7 +232,7 @@ export default function GameScreen({ onBackToHome }) {
               className={`hokm-suit-circle ${SUIT_COLORS[suit]}`}
               onClick={() => chooseHokm(suit)}
             >
-              {SUIT_SYMBOLS[suit]}
+              <SuitIcon suit={suit} />
             </button>
           ))}
         </div>

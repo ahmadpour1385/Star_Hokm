@@ -1,11 +1,6 @@
-const SUIT_SYMBOLS = { hearts: "♥\uFE0E", diamonds: "♦\uFE0E", clubs: "♣\uFE0E", spades: "♠\uFE0E" };
+import { SuitIcon } from "./Card";
 
-const SUIT_COLORS = {
-  hearts: "red",
-  diamonds: "red",
-  clubs: "black",
-  spades: "black",
-};
+const SUIT_COLORS = { hearts: "red", diamonds: "red", clubs: "black", spades: "black" };
 
 export default function Scoreboard({ roundsToWin, teamRounds, tricksCount, hokmSuit }) {
   return (
@@ -36,7 +31,7 @@ export default function Scoreboard({ roundsToWin, teamRounds, tricksCount, hokmS
           <div className="scoreboard-section">
             <div className="scoreboard-label">حکم</div>
             <div className={`scoreboard-hokm ${SUIT_COLORS[hokmSuit]}`}>
-              {SUIT_SYMBOLS[hokmSuit]}
+              <SuitIcon suit={hokmSuit} />
             </div>
           </div>
         </>

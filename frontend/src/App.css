@@ -1993,3 +1993,24 @@ body {
   flex-direction: row;
   transform: translateY(-50%);
 }
+.suit-icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.12em;
+}
+
+.scoreboard-hokm .suit-icon {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.hokm-suit-circle .suit-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.table-logo-suits .suit-icon {
+  width: 1em;
+  height: 1em;
+}

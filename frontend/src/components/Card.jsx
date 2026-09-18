@@ -1,9 +1,20 @@
-const SUIT_SYMBOLS = {
-  hearts: "♥\uFE0E",
-  diamonds: "♦\uFE0E",
-  clubs: "♣\uFE0E",
-  spades: "♠\uFE0E",
-};
+export function SuitIcon({ suit, className = "" }) {
+  const paths = {
+    spades:
+      "M12 2C9 6 4 9 4 13c0 2.2 1.8 4 4 4 1 0 1.9-.4 2.6-1-.3 1.8-1.1 3-2.6 4h8c-1.5-1-2.3-2.2-2.6-4 .7.6 1.6 1 2.6 1 2.2 0 4-1.8 4-4 0-4-5-7-8-11z",
+    hearts:
+      "M12 21s-7.5-4.6-10-9C.4 8.8 1.6 5 5 5c2 0 3.5 1.2 4.3 2.6C10.1 6.2 11.6 5 13.6 5 17 5 18.6 8.8 22 12c-2.5 4.4-10 9-10 9z",
+    diamonds: "M12 2 20 12 12 22 4 12z",
+    clubs:
+      "M12 2c-1.8 0-3.2 1.5-3.2 3.2 0 .6.2 1.2.5 1.7C8.2 6.4 7 6 5.7 6 3.5 6 1.7 7.8 1.7 10s1.8 4 4 4c1 0 1.9-.4 2.6-1-.4 2.3-1.4 4.2-3.3 5.6h14c-1.9-1.4-2.9-3.3-3.3-5.6.7.6 1.6 1 2.6 1 2.2 0 4-1.8 4-4s-1.8-4-4-4c-1.3 0-2.5.4-3.6.9.3-.5.5-1.1.5-1.7C15.2 3.5 13.8 2 12 2z",
+  };
+
+  return (
+    <svg viewBox="0 0 24 24" className={`suit-icon ${className}`} fill="currentColor">
+      <path d={paths[suit]} />
+    </svg>
+  );
+}
 
 const SUIT_COLORS = {
   hearts: "red",
@@ -70,7 +81,6 @@ export default function Card({ cardId, faceDown = false, disabled = false, onCli
 
   const { rank, suit } = parseCardId(cardId);
   const color = SUIT_COLORS[suit];
-  const symbol = SUIT_SYMBOLS[suit];
   const isFace = FACE_RANKS.includes(rank);
 
   return (
@@ -78,10 +88,9 @@ export default function Card({ cardId, faceDown = false, disabled = false, onCli
       className={`card card-face ${color} ${disabled ? "card-disabled" : ""} ${small ? "card-small" : ""}`}
       onClick={!disabled ? onClick : undefined}
     >
-    
       <div className="card-corner card-corner-top">
         <span className="card-rank">{rank}</span>
-        <span className="card-suit">{symbol}</span>
+        <span className="card-suit"><SuitIcon suit={suit} /></span>
       </div>
 
       {isFace ? (
@@ -89,19 +98,19 @@ export default function Card({ cardId, faceDown = false, disabled = false, onCli
           <div className="card-face-half top">
             <FaceIcon rank={rank} />
           </div>
-          <span className="card-face-suit-mini">{symbol}</span>
+          <span className="card-face-suit-mini"><SuitIcon suit={suit} /></span>
           <div className="card-face-half bottom">
             <FaceIcon rank={rank} />
           </div>
         </div>
       ) : (
-        <div className="card-center-suit">{symbol}</div>
+        <div className="card-center-suit"><SuitIcon suit={suit} /></div>
       )}
 
       {!isFace && (
         <div className="card-corner card-corner-bottom">
           <span className="card-rank">{rank}</span>
-          <span className="card-suit">{symbol}</span>
+          <span className="card-suit"><SuitIcon suit={suit} /></span>
         </div>
       )}
     </div>
