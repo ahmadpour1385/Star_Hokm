@@ -48,6 +48,7 @@ export function GameProvider({ children }) {
   const [gameOverResult, setGameOverResult] = useState(null);
 
   const [lastError, setLastError] = useState(null);
+  const [emojiReactions, setEmojiReactions] = useState([]);
   const [pendingSession, setPendingSession] = useState(() => loadStoredSession());
 
   const connectedRef = useRef(false);
@@ -176,8 +177,16 @@ export function GameProvider({ children }) {
       gameConnection.on("room_dissolved", () => setRoomDissolved(true))
     );
 
+    unsubscribers.push(gameConnection.on("room_dissolved", () => setRoomDissolved(true)));
+
     unsubscribers.push(
-      gameConnection.on("error", (data) => setLastError(data.message))
+      gameConnection.on("emoji_reaction", (data) => {
+        const id = Date.now() + Math.random();
+        setEmojiReactions((prev) => [...prev, { id, seat: data.seat, emoji: data.emoji }]);
+        setTimeout(() => {
+          setEmojiReactions((prev) => prev.filter((r) => r.id !== id));
+        }, 3000);
+      })
     );
 
     unsubscribers.push(
@@ -298,6 +307,9 @@ export function GameProvider({ children }) {
   function endGame() {
     gameConnection.send("end_game");
   }
+  function sendEmoji(emoji) {
+    gameConnection.send("send_emoji", { emoji });
+  }
 
   useEffect(() => {
     roomRef.current = room;
@@ -316,32 +328,12 @@ export function GameProvider({ children }) {
     roomDissolved,
     pendingSession,
 
-    hakemSeat,
-    hokmSuit,
-    myHand,
-    currentTurnSeat,
-    tableCards,
-
-    tricksCount,
-    lastTrickWinnerSeat,
-    teamRounds,
-    roundResult,
-    nextDealerSeat,
-    gameOverResult,
+    hakemSeat, hokmSuit, myHand, currentTurnSeat, tableCards,
+    tricksCount, lastTrickWinnerSeat, teamRounds, roundResult, nextDealerSeat, gameOverResult, lastError, emojiReactions,
     lastError,
 
-    connectToRoom,
-    assignTeam,
-    setReady,
-    startGame,
-    chooseHokm,
-    playCard,
-    startNextRound,
-    endGame,
-
-    acknowledgeDissolved,
-    confirmReconnect,
-    declineReconnect,
+    connectToRoom, assignTeam, setReady, startGame, chooseHokm, playCard, startNextRound, endGame, sendEmoji,
+    acknowledgeDissolved, confirmReconnect, declineReconnect,
   };
 
   return (

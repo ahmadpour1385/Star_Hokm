@@ -12,10 +12,13 @@ export default function GameScreen({ onBackToHome }) {
   const {
     room, userId, hakemSeat, hokmSuit, myHand, currentTurnSeat,
     tableCards, tricksCount, teamRounds, roundResult, nextDealerSeat, gameOverResult,
-    chooseHokm, playCard, startNextRound, endGame,
+    chooseHokm, playCard, startNextRound, endGame, sendEmoji, emojiReactions,
   } = useGame();
 
   const [showEndConfirm, setShowEndConfirm] = useState(false);
+  const [showEmojiPanel, setShowEmojiPanel] = useState(false);
+
+  const EMOJI_LIST = ["😄", "😂", "😮", "😡", "👍", "👎", "🔥", "😢", "🤔", "🎉"];
 
   if (!room) {
     return (
@@ -50,6 +53,11 @@ export default function GameScreen({ onBackToHome }) {
   const oppTricks = tricksCount?.[oppTeam] || 0;
 
   const sortedHand = sortHand(myHand, hokmSuit);
+  
+  function reactionForSeat(seatNum) {
+    const found = [...emojiReactions].reverse().find((r) => r.seat === seatNum);
+    return found?.emoji || null;
+  }
 
   function handlePlayCard(cardId) {
     if (!isMyTurn) return;
@@ -84,6 +92,30 @@ export default function GameScreen({ onBackToHome }) {
           ✕ End Game
         </button>
       )}
+
+      <button className="emoji-toggle-btn" onClick={() => setShowEmojiPanel((v) => !v)}>
+        💬
+      </button>
+
+      {showEmojiPanel && (
+        <div className="emoji-panel">
+          {EMOJI_LIST.map((emoji) => (
+            <button
+              key={emoji}
+              className="emoji-panel-item"
+              onClick={() => {
+                sendEmoji(emoji);
+                setShowEmojiPanel(false);
+              }}
+            >
+              {emoji}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {showEndConfirm && (
+        <ConfirmBoard
 
       {showEndConfirm && (
         <ConfirmBoard
@@ -151,6 +183,9 @@ export default function GameScreen({ onBackToHome }) {
               nameAbove={true}
               isOffline={playerBySeat[(mySeat + 2) % 4] && !room.connected_user_ids?.includes(playerBySeat[(mySeat + 2) % 4].user_id)}
             />
+            {reactionForSeat((mySeat + 2) % 4) && (
+              <span className="emoji-bubble">{reactionForSeat((mySeat + 2) % 4)}</span>
+            )}
           </div>
 
           <div className="seat-left-abs chair-slot">
@@ -164,11 +199,9 @@ export default function GameScreen({ onBackToHome }) {
               nameAbove={true}
               isOffline={playerBySeat[(mySeat + 3) % 4] && !room.connected_user_ids?.includes(playerBySeat[(mySeat + 3) % 4].user_id)}
             />
-            <div className="opp-trick-pile">
-              {Array.from({ length: oppTricks }).map((_, i) => (
-                <div key={i} className="won-trick-mini" />
-              ))}
-            </div>
+            {reactionForSeat((mySeat + 3) % 4) && (
+              <span className="emoji-bubble">{reactionForSeat((mySeat + 3) % 4)}</span>
+            )}
           </div>
 
           <div className="seat-right-abs chair-slot">
@@ -180,8 +213,12 @@ export default function GameScreen({ onBackToHome }) {
               cardsCount={13}
               position="right"
               nameAbove={true}
+              nameAbove={true}
               isOffline={playerBySeat[(mySeat + 1) % 4] && !room.connected_user_ids?.includes(playerBySeat[(mySeat + 1) % 4].user_id)}
             />
+            {reactionForSeat((mySeat + 1) % 4) && (
+              <span className="emoji-bubble">{reactionForSeat((mySeat + 1) % 4)}</span>
+            )}
           </div>
 
           <div className="seat-bottom-abs chair-slot">
@@ -193,6 +230,9 @@ export default function GameScreen({ onBackToHome }) {
               cardsCount={myHand.length}
               position="bottom"
             />
+            {reactionForSeat(mySeat) && (
+              <span className="emoji-bubble">{reactionForSeat(mySeat)}</span>
+            )}
           </div>
 
           <div className="table-center">
@@ -203,8 +243,14 @@ export default function GameScreen({ onBackToHome }) {
             ))}
           </div>
 
-          <div className="won-tricks-pile">
+         <div className="won-tricks-pile">
             {Array.from({ length: myTricks }).map((_, i) => (
+              <div key={i} className="won-trick-mini" />
+            ))}
+          </div>
+
+          <div className="opp-trick-pile">
+            {Array.from({ length: oppTricks }).map((_, i) => (
               <div key={i} className="won-trick-mini" />
             ))}
           </div>

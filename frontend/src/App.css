@@ -497,14 +497,14 @@ body {
 
 .seat-top-abs {
   position: absolute;
-  top: clamp(-92px, -26vmin, -70px);
+  top: clamp(-64px, -17vw, -46px);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .seat-left-abs {
   position: absolute;
-  left: clamp(-64px, -17vw, -46px);
+  left: clamp(-78px, -20vw, -56px);
   top: 50%;
   transform: translateY(-50%);
 }
@@ -552,8 +552,8 @@ body {
 
 .opp-trick-pile {
   position: absolute;
-  top: -30px;
-  left: -30px;
+  top: -6px;
+  left: -6px;
   display: flex;
   z-index: 4;
 }
@@ -1918,7 +1918,7 @@ body {
   top: 6%;
   left: 50%;
   width: 1.5px;
-  height: 9%;
+  height: 6%;
   transform: translateX(-50%);
 }
 
@@ -1927,7 +1927,7 @@ body {
   bottom: 6%;
   left: 50%;
   width: 1.5px;
-  height: 9%;
+  height: 6%;
   transform: translateX(-50%);
 }
 
@@ -1964,7 +1964,7 @@ body {
 .ray-stars-top {
   top: 6%;
   left: 50%;
-  height: 9%;
+  height: 6%;
   flex-direction: column;
   transform: translateX(-50%);
 }
@@ -1972,7 +1972,7 @@ body {
 .ray-stars-bottom {
   bottom: 6%;
   left: 50%;
-  height: 9%;
+  height: 6%;
   flex-direction: column;
   transform: translateX(-50%);
 }
@@ -2013,6 +2013,69 @@ body {
   width: 1em;
   height: 1em;
 }
+
 .seat-bottom-abs .player-seat-avatar {
-  margin-top: 22px;
+  margin-top: 48px;
+}
+
+.emoji-toggle-btn {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 40;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(154, 122, 46, 0.18);
+  border: 1px solid #766018;
+  color: #d9b45c;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emoji-panel {
+  position: fixed;
+  top: 46px;
+  left: 8px;
+  z-index: 41;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  background: rgba(10, 8, 4, 0.95);
+  border: 1px solid #766018;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.emoji-panel-item {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(154, 122, 46, 0.12);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emoji-bubble {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  z-index: 6;
+  animation: emojiPop 0.25s ease-out;
+  pointer-events: none;
+}
+
+@keyframes emojiPop {
+  0% { transform: translateX(-50%) scale(0.3); opacity: 0; }
+  60% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
 }
