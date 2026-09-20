@@ -353,6 +353,23 @@ body {
   justify-content: center;
   position: relative;
   padding: 30px 0;
+  --diamond-outer: calc(clamp(156px, 42vmin, 200px) + 30px);
+  --chair-d: clamp(54px, 17vmin, 72px);
+  --seat-gap: clamp(28px, 7.5vw, 42px);
+  --seat-center-dist: calc(var(--diamond-outer) * 0.7071 + var(--seat-gap) + var(--chair-d) / 2);
+}
+
+.game-table-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--seat-center-dist) * 2);
+  height: calc(var(--seat-center-dist) * 2);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(154, 122, 46, 0.35);
+  pointer-events: none;
 }
 
 .table-felt {
@@ -470,10 +487,13 @@ body {
 }
 
 .chair-slot {
-  position: relative;
+  position: absolute;
+  width: var(--chair-d);
+  height: var(--chair-d);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
 }
 
 .chair-back {
@@ -496,31 +516,27 @@ body {
 }
 
 .seat-top-abs {
-  position: absolute;
-  top: clamp(-64px, -17vw, -46px);
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, calc(-50% - var(--seat-center-dist)));
 }
 
 .seat-left-abs {
-  position: absolute;
-  left: clamp(-78px, -20vw, -56px);
   top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(calc(-50% - var(--seat-center-dist)), -50%);
 }
 
 .seat-right-abs {
-  position: absolute;
-  right: clamp(-64px, -17vw, -46px);
   top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(calc(-50% + var(--seat-center-dist)), -50%);
 }
 
 .seat-bottom-abs {
-  position: absolute;
-  bottom: clamp(-92px, -26vmin, -70px);
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, calc(-50% + var(--seat-center-dist)));
 }
 
 .table-center {
