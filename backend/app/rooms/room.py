@@ -27,7 +27,7 @@ class Room:
 
     # ---------- مدیریت بازیکن‌ها ----------
 
-    def add_player(self, user_id: int, display_name: str) -> Player:
+    def add_player(self, user_id: int, display_name: str, avatar: str | None = None) -> Player:
         """یه بازیکن جدید با رمز درست وارد اتاق میشه (بدون تیم و صندلی مشخص - سازنده اتاق بعداً تعیین می‌کنه)"""
         if self.status != RoomStatus.WAITING:
             raise ValueError("اتاق دیگه در حالت پذیرش بازیکن جدید نیست")
@@ -37,7 +37,7 @@ class Room:
             raise ValueError("این بازیکن از قبل توی اتاقه")
 
         is_owner = user_id == self.owner_user_id
-        player = Player(user_id=user_id, display_name=display_name, is_room_owner=is_owner)
+        player = Player(user_id=user_id, display_name=display_name, is_room_owner=is_owner, avatar=avatar)
         self.players[user_id] = player
         return player
 

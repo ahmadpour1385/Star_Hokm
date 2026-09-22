@@ -62,6 +62,7 @@ class CreateRoomRequest(BaseModel):
     owner_display_name: str
     password: str
     rounds_to_win: int
+    owner_avatar: str | None = None
 
 
 class JoinRoomRequest(BaseModel):
@@ -69,6 +70,7 @@ class JoinRoomRequest(BaseModel):
     password: str
     user_id: int
     display_name: str
+    avatar: str | None = None
 
 class ClaimNameRequest(BaseModel):
     player_id: str
@@ -84,6 +86,7 @@ def create_room(payload: CreateRoomRequest):
         owner_display_name=payload.owner_display_name,
         password=payload.password,
         rounds_to_win=payload.rounds_to_win,
+        owner_avatar=payload.owner_avatar,
     )
     return room.to_public_dict()
 
@@ -95,6 +98,7 @@ def join_room(payload: JoinRoomRequest):
         password=payload.password,
         user_id=payload.user_id,
         display_name=payload.display_name,
+        avatar=payload.avatar,
     )
     return room.to_public_dict()
 

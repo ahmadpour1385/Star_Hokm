@@ -82,6 +82,7 @@ async def _route_action(room: Room, user_id: int, message: ClientMessage) -> Non
         "play_card": _handle_play_card,
         "start_next_round": _handle_start_next_round,
         "end_game": _handle_end_game,
+        "send_emoji": _handle_send_emoji,
     }
     handler = handlers.get(message.action)
     if handler is None:
@@ -196,6 +197,16 @@ async def _handle_end_game(room: Room, user_id: int, data: dict) -> None:
     )
     room_manager.remove_room(room.room_code)
 
+
+async def _handle_send_emoji(room: Room, user_id: int, data: dict) -> None:
+    emoji = data.get("emoji", "")
+    if not emoji:
+        return
+    seat = _seat_by_user(room, user_id)
+    await connection_manager.broadcast(
+        room.room_code,
+        ServerMessage(event="emoji_reaction", data={"seat": seat, "emoji": emoji}).model_dump(),
+    )
 
 # ---------- کمکی‌های داخلی ----------
 

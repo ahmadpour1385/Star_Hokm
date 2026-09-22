@@ -42,6 +42,7 @@ class Player:
     team: TeamId | None = None
     is_ready: bool = False
     is_room_owner: bool = False
+    avatar: str | None = None  # شناسه آواتار انتخابی (مثلاً "male1", "female2")
 
     def to_public_dict(self) -> dict:
         """اطلاعاتی که امن هست برای همه بازیکنای اتاق فرستاده بشه (بدون دست کارت‌ها)"""
@@ -52,6 +53,7 @@ class Player:
             "team": self.team.value if self.team is not None else None,
             "is_ready": self.is_ready,
             "is_room_owner": self.is_room_owner,
+            "avatar": self.avatar,
         }
 
 

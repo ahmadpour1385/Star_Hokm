@@ -30,6 +30,7 @@ class RoomManager:
         owner_display_name: str,
         password: str,
         rounds_to_win: int,
+        owner_avatar: str | None = None,
     ) -> Room:
         """اتاق جدید می‌سازه و سازنده اتاق رو خودکار به‌عنوان اولین بازیکن اضافه می‌کنه"""
         if len(password) < settings.ROOM_PASSWORD_MIN_LENGTH:
@@ -44,14 +45,16 @@ class RoomManager:
             owner_user_id=owner_user_id,
             rounds_to_win=rounds_to_win,
         )
-        room.add_player(owner_user_id, owner_display_name)
+        room.add_player(owner_user_id, owner_display_name, avatar=owner_avatar)
         self._rooms[room_code] = room
         return room
 
     def get_room(self, room_code: str) -> Room | None:
         return self._rooms.get(room_code)
 
-    def join_room(self, room_code: str, password: str, user_id: int, display_name: str) -> Room:
+    def join_room(
+        self, room_code: str, password: str, user_id: int, display_name: str, avatar: str | None = None
+    ) -> Room:
         """یه بازیکن با کد و رمز درست وارد اتاق میشه"""
         room = self.get_room(room_code)
         if room is None:
@@ -59,7 +62,7 @@ class RoomManager:
         if not room.check_password(password):
             raise ValueError("رمز اتاق اشتباهه")
 
-        room.add_player(user_id, display_name)
+        room.add_player(user_id, display_name, avatar=avatar)
         return room
 
     def remove_room(self, room_code: str) -> None:
