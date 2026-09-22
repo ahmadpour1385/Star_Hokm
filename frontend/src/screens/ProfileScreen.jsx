@@ -154,5 +154,6 @@ export default function ProfileScreen({ onBack }) {
         </section>
       </div>
     </div>
+    </section>
   );
 }
