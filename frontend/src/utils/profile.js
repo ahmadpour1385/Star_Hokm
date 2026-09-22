@@ -9,6 +9,7 @@ const DEFAULT_PROFILE = {
   playerId: null,
   displayName: "",
   bio: "",
+  avatar: null,
   gamesPlayed: 0,
   wins: 0,
   losses: 0,
@@ -46,6 +47,13 @@ export function setLocalDisplayName(name) {
 export function saveBio(bio) {
   const profile = getProfile();
   profile.bio = bio;
+  saveProfile(profile);
+  return profile;
+}
+
+export function saveAvatar(avatarId) {
+  const profile = getProfile();
+  profile.avatar = avatarId;
   saveProfile(profile);
   return profile;
 }

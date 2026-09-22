@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { getProfile, setLocalDisplayName, saveBio } from "../utils/profile";
+import { getProfile, setLocalDisplayName, saveBio, saveAvatar } from "../utils/profile";
 import { claimDisplayName } from "../ws/api";
+import AvatarIcon, { AVATAR_OPTIONS } from "../components/AvatarIcon";
 
 export default function ProfileScreen({ onBack }) {
   const [profile, setProfile] = useState(getProfile());
@@ -43,12 +44,36 @@ export default function ProfileScreen({ onBack }) {
         {/* بخش ۱: آواتار بزرگ */}
         <section className="profile-section profile-hero">
           <div className="profile-avatar-ring">
-            <div className="profile-avatar-big">{(profile.displayName || "?")[0]?.toUpperCase()}</div>
+          <div className="profile-avatar-big">
+            {profile.avatar ? <AvatarIcon id={profile.avatar} /> : (profile.displayName || "?")[0]?.toUpperCase()}
+          </div>
           </div>
           <div className="profile-hero-name">{profile.displayName || "Unnamed Player"}</div>
           <div className="profile-hero-tag">Star Hokm Player</div>
         </section>
+        {/* بخش جدید: انتخاب آواتار */}
+        <section className="profile-section">
+          <div className="profile-section-title">
+            <span className="title-star">✦</span> Avatar
+          </div>
+          <div className="avatar-picker-grid">
+            {AVATAR_OPTIONS.map((id) => (
+              <button
+                key={id}
+                className={`avatar-picker-item ${profile.avatar === id ? "selected" : ""}`}
+                onClick={() => setProfile(saveAvatar(id))}
+              >
+                <AvatarIcon id={id} />
+              </button>
+            ))}
+          </div>
+        </section>
 
+        {/* بخش ۳: آمار */}
+        <section className="profile-section">
+          <div className="profile-section-title">
+            <span className="title-star">✦</span> Statistics
+          </div>
         {/* بخش ۲: نام نمایشی و بیوگرافی */}
         <section className="profile-section">
           <div className="profile-section-title">

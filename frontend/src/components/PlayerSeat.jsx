@@ -1,3 +1,5 @@
+import AvatarIcon from "./AvatarIcon";
+
 export default function PlayerSeat({ player, isHakem, isCurrentTurn, cardsCount, position, isOffline = false, nameAbove = false }) {
   if (!player) {
     return (
@@ -11,7 +13,9 @@ export default function PlayerSeat({ player, isHakem, isCurrentTurn, cardsCount,
   const avatarEl = (
     <div className="player-seat-avatar">
       {isHakem && <span className="player-seat-crown">👑</span>}
-      <div className="player-seat-circle">{player.display_name?.[0] || "?"}</div>
+      <div className="player-seat-circle">
+        {player.avatar ? <AvatarIcon id={player.avatar} /> : player.display_name?.[0] || "?"}
+      </div>
     </div>
   );
 

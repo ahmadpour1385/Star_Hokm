@@ -291,6 +291,7 @@ export default function GameScreen({ onBackToHome }) {
               isCurrentTurn={isMyTurn}
               cardsCount={myHand.length}
               position="bottom"
+              nameAbove={false}
             />
 
             {reactionForSeat(mySeat) && (

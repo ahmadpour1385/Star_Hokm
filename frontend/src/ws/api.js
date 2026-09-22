@@ -39,12 +39,13 @@ async function postJson(path, body) {
   return data;
 }
 
-export function createRoom({ ownerUserId, ownerDisplayName, password, roundsToWin }) {
+export function createRoom({ ownerUserId, ownerDisplayName, password, roundsToWin, ownerAvatar }) {
   return postJson("/rooms/create", {
     owner_user_id: ownerUserId,
     owner_display_name: ownerDisplayName,
     password,
     rounds_to_win: roundsToWin,
+    owner_avatar: ownerAvatar || null,
   });
 }
 
@@ -67,11 +68,12 @@ export async function searchDisplayNames(query) {
   return data.results || [];
 }
 
-export function joinRoom({ roomCode, password, userId, displayName }) {
+export function joinRoom({ roomCode, password, userId, displayName, avatar }) {
   return postJson("/rooms/join", {
     room_code: roomCode,
     password,
     user_id: userId,
     display_name: displayName,
+    avatar: avatar || null,
   });
 }

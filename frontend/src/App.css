@@ -355,8 +355,9 @@ body {
   padding: 30px 0;
   --diamond-outer: calc(clamp(156px, 42vmin, 200px) + 30px);
   --chair-d: clamp(54px, 17vmin, 72px);
-  --seat-gap: clamp(14px, 4vw, 22px);
+  --seat-gap: clamp(6px, 2vw, 10px);
   --seat-center-dist: calc(var(--diamond-outer) * 0.7071 + var(--seat-gap) + var(--chair-d) / 2);
+  --vertex-dist: calc(var(--diamond-outer) * 0.7071);
 }
 
 .game-table-wrapper::before {
@@ -1929,22 +1930,9 @@ body {
   pointer-events: none;
 }
 
-.ray-line-top {
-  --ray-dir: to bottom;
-  top: 8%;
-  left: 50%;
-  width: 1.5px;
-  height: 3.5%;
-  transform: translateX(-50%);
-}
-
+.ray-line-top,
 .ray-line-bottom {
-  --ray-dir: to top;
-  bottom: 8%;
-  left: 50%;
-  width: 1.5px;
-  height: 3.5%;
-  transform: translateX(-50%);
+  display: none;
 }
 
 .ray-line-left {
@@ -1978,23 +1966,24 @@ body {
 }
 
 .ray-stars-top {
-  top: 8%;
+  top: calc(50% - var(--vertex-dist));
   left: 50%;
-  height: 3.5%;
-  flex-direction: column;
+  height: auto;
+  flex-direction: row;
   justify-content: center;
-  gap: 1px;
-  transform: translateX(-50%);
+  gap: 2px;
+  transform: translate(-50%, -50%);
 }
 
 .ray-stars-bottom {
-  bottom: 8%;
+  bottom: auto;
+  top: calc(50% + var(--vertex-dist));
   left: 50%;
-  height: 3.5%;
-  flex-direction: column;
+  height: auto;
+  flex-direction: row;
   justify-content: center;
-  gap: 1px;
-  transform: translateX(-50%);
+  gap: 2px;
+  transform: translate(-50%, -50%);
 }
 
 .ray-stars-left {
@@ -2110,4 +2099,41 @@ body {
   0% { transform: translateX(-50%) scale(0.3); opacity: 0; }
   60% { transform: translateX(-50%) scale(1.2); opacity: 1; }
   100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+.avatar-icon {
+  width: 100%;
+  height: 100%;
+  color: #d9b45c;
+}
+
+.player-seat-circle .avatar-icon,
+.profile-avatar-big .avatar-icon,
+.profile-avatar .avatar-icon {
+  padding: 3px;
+}
+
+.avatar-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.avatar-picker-item {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(154, 122, 46, 0.3);
+  padding: 8px;
+  cursor: pointer;
+}
+
+.avatar-picker-item.selected {
+  border-color: #d9b45c;
+  background: rgba(154, 122, 46, 0.15);
+  box-shadow: 0 0 10px rgba(154, 122, 46, 0.3);
+}
+
+.avatar-picker-item .avatar-icon {
+  color: #d9b45c;
 }

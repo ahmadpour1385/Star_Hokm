@@ -37,6 +37,7 @@ export default function JoinRoomScreen({ onBack, onRoomJoined }) {
         password,
         userId,
         displayName,
+        avatar: getProfile().avatar,
       });
 
       await connectToRoom(roomCode.trim(), userId);

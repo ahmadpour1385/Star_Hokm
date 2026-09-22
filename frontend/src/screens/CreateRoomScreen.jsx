@@ -33,6 +33,7 @@ export default function CreateRoomScreen({ onBack, onRoomJoined }) {
         ownerDisplayName: displayName,
         password,
         roundsToWin,
+        ownerAvatar: getProfile().avatar,
       });
 
       await connectToRoom(room.room_code, userId);
