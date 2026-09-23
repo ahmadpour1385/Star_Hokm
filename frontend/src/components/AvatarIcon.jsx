@@ -1,30 +1,20 @@
+import male1 from "../assets/avatars/male1.png";
+import male2 from "../assets/avatars/male2.png";
+import female1 from "../assets/avatars/female1.png";
+import female2 from "../assets/avatars/female2.png";
+
 export const AVATAR_OPTIONS = ["male1", "male2", "female1", "female2"];
 
+const AVATAR_IMAGES = {
+  male1,
+  male2,
+  female1,
+  female2,
+};
+
 export default function AvatarIcon({ id, className = "" }) {
-  return (
-    <svg viewBox="0 0 24 24" className={`avatar-icon ${className}`} fill="currentColor">
-      <circle cx="12" cy="9" r="4.2" />
-      <path d="M12 13c-3.6 0-6.5 2.4-6.5 5.4V20h13v-1.6c0-3-2.9-5.4-6.5-5.4z" />
+  const src = AVATAR_IMAGES[id];
+  if (!src) return null;
 
-      {id === "male1" && (
-        <rect x="7.6" y="4.2" width="8.8" height="3" rx="1.2" />
-      )}
-
-      {id === "male2" && (
-        <path d="M7.9 6.2c0-2.3 1.8-4.2 4.1-4.2s4.1 1.9 4.1 4.2c-1-.6-2.5-1-4.1-1s-3.1.4-4.1 1z" />
-      )}
-
-      {id === "female1" && (
-        <path d="M5.6 8.4c0-3.6 2.9-6.4 6.4-6.4s6.4 2.8 6.4 6.4c0 1.1-.3 2.2-.8 3.1-.3-2.8-2.8-5-5.6-5s-5.3 2.2-5.6 5c-.5-.9-.8-2-.8-3.1z" />
-      )}
-
-      {id === "female2" && (
-        <>
-          <path d="M5.6 8.4c0-3.6 2.9-6.4 6.4-6.4s6.4 2.8 6.4 6.4c0 1.1-.3 2.2-.8 3.1-.3-2.8-2.8-5-5.6-5s-5.3 2.2-5.6 5c-.5-.9-.8-2-.8-3.1z" />
-          <path d="M5.8 9c-.6 1.4-.9 3.2-.9 5.2 0 1 .1 2 .3 2.8.6-.3 1.1-.9 1.3-1.6.2-2.4.3-4.6-.7-6.4z" />
-          <path d="M18.2 9c.6 1.4.9 3.2.9 5.2 0 1-.1 2-.3 2.8-.6-.3-1.1-.9-1.3-1.6-.2-2.4-.3-4.6.7-6.4z" />
-        </>
-      )}
-    </svg>
-  );
+  return <img src={src} alt="" className={`avatar-icon ${className}`} />;
 }
