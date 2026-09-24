@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getProfile, setLocalDisplayName } from "../utils/profile";
 import { claimDisplayName } from "../ws/api";
 import Card from "../components/Card";
+import AvatarIcon from "../components/AvatarIcon";
 import BottomNav from "../components/BottomNav";
 
 const FLOATING_CARDS = [
@@ -42,7 +43,9 @@ export default function WelcomeScreen({ onSelectCreate, onSelectJoin, onOpenProf
       <div className="casino-pattern" />
 
       <div className="profile-card" onClick={() => !editing && onOpenProfile()}>
-        <div className="profile-avatar">{(profile.displayName || "?")[0]?.toUpperCase()}</div>
+        <div className="profile-avatar">
+          {profile.avatar ? <AvatarIcon id={profile.avatar} /> : (profile.displayName || "?")[0]?.toUpperCase()}
+        </div>
 
         <div className="profile-info">
           {editing ? (

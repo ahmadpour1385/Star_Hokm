@@ -354,8 +354,8 @@ body {
   position: relative;
   padding: 30px 0;
   --diamond-outer: calc(clamp(156px, 42vmin, 200px) + 30px);
-  --chair-d: clamp(54px, 17vmin, 72px);
-  --seat-gap: clamp(6px, 2vw, 10px);
+  --chair-d: clamp(66px, 21vmin, 88px);
+  --seat-gap: clamp(0px, 0.6vw, 3px);
   --seat-center-dist: calc(var(--diamond-outer) * 0.7071 + var(--seat-gap) + var(--chair-d) / 2);
   --vertex-dist: calc(var(--diamond-outer) * 0.7071);
 }
@@ -638,8 +638,8 @@ body {
 }
 
 .player-seat-circle {
-  width: clamp(28px, 9.5vmin, 40px);
-  height: clamp(28px, 9.5vmin, 40px);
+  width: clamp(36px, 13vmin, 54px);
+  height: clamp(36px, 13vmin, 54px);
   border-radius: 50%;
   background: linear-gradient(135deg, #2a5c46, #143d2c);
   border: 2px solid #ffd700;
@@ -745,7 +745,6 @@ body {
 }
 
 .card-disabled {
-  filter: grayscale(0.35) brightness(1.6) contrast(0.55);
   cursor: not-allowed;
 }
 
