@@ -1,15 +1,15 @@
-import male1 from "../assets/avatars/male1.png";
-import male2 from "../assets/avatars/male2.png";
-import female1 from "../assets/avatars/female1.png";
-import female2 from "../assets/avatars/female2.png";
+import avatar1 from "../assets/avatars/avatar1.png";
+import avatar2 from "../assets/avatars/avatar2.png";
+import avatar3 from "../assets/avatars/avatar3.png";
+import avatar4 from "../assets/avatars/avatar4.png";
 
-export const AVATAR_OPTIONS = ["male1", "male2", "female1", "female2"];
+export const AVATAR_OPTIONS = ["avatar1", "avatar2", "avatar3", "avatar4"];
 
 const AVATAR_IMAGES = {
-  male1,
-  male2,
-  female1,
-  female2,
+  avatar1,
+  avatar2,
+  avatar3,
+  avatar4,
 };
 
 export default function AvatarIcon({ id, className = "" }) {
