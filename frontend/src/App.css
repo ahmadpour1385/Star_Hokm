@@ -375,126 +375,48 @@ body {
 
 .table-felt {
   position: relative;
-  width: clamp(210px, 58vmin, 270px);
-  height: clamp(210px, 58vmin, 270px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: clamp(280px, 92vmin, 480px);
+  aspect-ratio: 3 / 2;
+  background-size: cover;
+  background-position: center 40%;
+  border-radius: 16px;
 }
 
-.table-diamond-plate {
+.table-felt .seat-top-abs {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: clamp(156px, 42vmin, 200px);
-  height: clamp(156px, 42vmin, 200px);
-  transform: translate(-50%, -50%) rotate(45deg);
-  border-radius: 18px;
-  background:
-    repeating-linear-gradient(100deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 2px, transparent 2px, transparent 6px),
-    linear-gradient(135deg, #3f2c17 0%, #2c1e10 55%, #1f150a 100%);
-  border: 5px solid #766018;
+  top: 30%;
+  left: 48.5%;
+  transform: translate(-50%, -50%);
 }
 
-.table-center-medallion {
+.table-felt .seat-left-abs {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: clamp(100px, 27vmin, 130px);
-  height: clamp(100px, 27vmin, 130px);
-  transform: translate(-50%, -50%) rotate(45deg);
-  border-radius: 12px;
-  background: #0a0a0a;
-  border: 3px solid #9a7a2e;
-  z-index: 0;
+  top: 47%;
+  left: 27%;
+  transform: translate(-50%, -50%);
 }
 
-.table-outer-ring {
+.table-felt .seat-right-abs {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: calc(clamp(156px, 42vmin, 200px) + 30px);
-  height: calc(clamp(156px, 42vmin, 200px) + 30px);
-  transform: translate(-50%, -50%) rotate(45deg);
-  border-radius: 22px;
-  border: 1.5px solid #766018;
-  opacity: 0.55;
-  pointer-events: none;
-  z-index: 0;
+  top: 47%;
+  left: 73.5%;
+  transform: translate(-50%, -50%);
 }
 
-.table-outer-ring {
+.table-felt .seat-bottom-abs {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: calc(clamp(156px, 42vmin, 200px) + 30px);
-  height: calc(clamp(156px, 42vmin, 200px) + 30px);
-  transform: translate(-50%, -50%) rotate(45deg);
-  border-radius: 22px;
-  border: 1.5px solid #766018;
-  opacity: 0.55;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.table-logo {
-  position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  pointer-events: none;
-  user-select: none;
 }
 
-.table-logo-star {
-  width: clamp(38px, 12vmin, 52px);
-  height: clamp(38px, 12vmin, 52px);
-  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
-}
-
-.table-logo-suits {
-  display: flex;
-  gap: 5px;
-  font-size: clamp(8px, 2.4vmin, 11px);
-  margin-bottom: 1px;
-}
-
-.table-logo-suits .suit-red { color: #d90429; }
-.table-logo-suits .suit-gold { color: #d4af37; opacity: 0.85; }
-
-.table-logo-star-text {
-  font-family: "Poppins", sans-serif;
-  font-weight: 800;
-  font-size: clamp(11px, 3.6vmin, 15px);
-  letter-spacing: 2px;
-  color: #f5d76e;
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
-  line-height: 1;
-}
-
-.table-logo-hokm-text {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: clamp(7px, 2.2vmin, 9px);
-  letter-spacing: 3px;
-  color: #d4af37;
-  opacity: 0.85;
-  line-height: 1.4;
-}
-
-.chair-slot {
-  position: absolute;
-  width: var(--chair-d);
-  height: var(--chair-d);
+.table-felt .chair-slot {
+  position: relative;
+  width: clamp(40px, 8vmin, 56px);
+  height: clamp(40px, 8vmin, 56px);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: visible;
 }
 
 .chair-back {
