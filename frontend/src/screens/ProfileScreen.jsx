@@ -69,7 +69,7 @@ export default function ProfileScreen({ onBack }) {
       <div className="profile-page-content">
 
         {/* بخش ۱: آواتار بزرگ */}
-        <section className="profile-section profile-hero">
+        <section className="profile-section profile-hero" style={{ padding: 0, overflow: "hidden" }}>
           <div className="profile-avatar-big-square">
             {profile.avatar ? <AvatarIcon id={profile.avatar} /> : (profile.displayName || "?")[0]?.toUpperCase()}
           </div>

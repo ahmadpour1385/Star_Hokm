@@ -2054,10 +2054,11 @@ body {
 .avatar-picker-item .avatar-icon {
   color: #d9b45c;
 }
+
 .profile-avatar-big-square {
-  width: 220px;
-  height: 220px;
-  border-radius: 20px;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 16px;
   overflow: hidden;
   margin-bottom: 14px;
   background: #0b1410;
