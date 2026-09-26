@@ -4,7 +4,7 @@ import { getProfile, setLocalDisplayName, saveBio, saveAvatar } from "../utils/p
 
 import { claimDisplayName } from "../ws/api";
 
-import AvatarIcon, { AVATAR_OPTIONS } from "../components/AvatarIcon";
+import AvatarIcon, { MALE_AVATAR_OPTIONS, FEMALE_AVATAR_OPTIONS } from "../components/AvatarIcon";
 
 export default function ProfileScreen({ onBack }) {
 
@@ -78,36 +78,37 @@ export default function ProfileScreen({ onBack }) {
         </section>
         {/* بخش جدید: انتخاب آواتار */}
 
+       {/* بخش جدید: انتخاب آواتار */}
         <section className="profile-section">
-
           <div className="profile-section-title">
-
             <span className="title-star">✦</span> Avatar
-
           </div>
 
+          <div className="avatar-group-label">Male</div>
           <div className="avatar-picker-grid">
-
-            {AVATAR_OPTIONS.map((id) => (
-
+            {MALE_AVATAR_OPTIONS.map((id) => (
               <button
-
                 key={id}
-
                 className={`avatar-picker-item ${profile.avatar === id ? "selected" : ""}`}
-
                 onClick={() => setProfile(saveAvatar(id))}
-
               >
-
                 <AvatarIcon id={id} />
-
               </button>
-
             ))}
-
           </div>
 
+          <div className="avatar-group-label">Female</div>
+          <div className="avatar-picker-grid">
+            {FEMALE_AVATAR_OPTIONS.map((id) => (
+              <button
+                key={id}
+                className={`avatar-picker-item ${profile.avatar === id ? "selected" : ""}`}
+                onClick={() => setProfile(saveAvatar(id))}
+              >
+                <AvatarIcon id={id} />
+              </button>
+            ))}
+          </div>
         </section>
 
         {/* بخش ۳: آمار */}

@@ -2077,3 +2077,10 @@ body {
   object-fit: cover;
   border-radius: 18px;
 }
+
+.avatar-group-label {
+  font-size: 11px;
+  color: #c9b896;
+  margin: 12px 0 8px;
+  font-weight: 600;
+}
