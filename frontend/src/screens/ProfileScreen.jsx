@@ -69,25 +69,13 @@ export default function ProfileScreen({ onBack }) {
       <div className="profile-page-content">
 
         {/* بخش ۱: آواتار بزرگ */}
-
         <section className="profile-section profile-hero">
-
-          <div className="profile-avatar-ring">
-
-            <div className="profile-avatar-big">
-
-              {profile.avatar ? <AvatarIcon id={profile.avatar} /> : (profile.displayName || "?")[0]?.toUpperCase()}
-
-            </div>
-
+          <div className="profile-avatar-big-square">
+            {profile.avatar ? <AvatarIcon id={profile.avatar} /> : (profile.displayName || "?")[0]?.toUpperCase()}
           </div>
-
           <div className="profile-hero-name">{profile.displayName || "Unnamed Player"}</div>
-
           <div className="profile-hero-tag">Star Hokm Player</div>
-
         </section>
-
         {/* بخش جدید: انتخاب آواتار */}
 
         <section className="profile-section">
