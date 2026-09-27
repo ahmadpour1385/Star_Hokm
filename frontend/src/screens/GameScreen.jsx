@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useGame } from "../context/GameContext";
 import Card, { parseCardId, sortHand, SuitIcon } from "../components/Card";
-import tableRoomImg from "../assets/table/table-room.png";;
 import PlayerSeat from "../components/PlayerSeat";
 import Scoreboard from "../components/Scoreboard";
 import ConfirmBoard from "../components/ConfirmBoard";
@@ -143,9 +142,51 @@ export default function GameScreen({ onBackToHome }) {
         />
       )}
 
-      <div className="game-table-wrapper">
-        <div className="table-felt" style={{ backgroundImage: `url(${tableRoomImg})` }}>
+        <div className="table-felt">
+          <div className="table-diamond-plate" />
+          <div className="table-outer-ring" />
+          <div className="table-center-medallion" />
+
+          <div className="ray-line ray-line-top" />
+          <div className="ray-line ray-line-bottom" />
+          <div className="ray-line ray-line-left" />
+          <div className="ray-line ray-line-right" />
+
+          <div className="ray-stars ray-stars-top">
+            <span>✦</span><span>✦</span><span>✦</span>
+          </div>
+          <div className="ray-stars ray-stars-bottom">
+            <span>✦</span><span>✦</span><span>✦</span>
+          </div>
+          <div className="ray-stars ray-stars-left">
+            <span>✦</span><span>✦</span><span>✦</span>
+          </div>
+          <div className="ray-stars ray-stars-right">
+            <span>✦</span><span>✦</span><span>✦</span>
+          </div>
+
+          <div className="table-logo">
+            <svg className="table-logo-star" viewBox="0 0 100 100">
+              <polygon
+                points="50,6 61,38 95,38 67,58 78,90 50,70 22,90 33,58 5,38 39,38"
+                fill="none"
+                stroke="#b8891f"
+                strokeWidth="7"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <div className="table-logo-suits">
+              <span className="suit-gold"><SuitIcon suit="spades" /></span>
+              <span className="suit-red"><SuitIcon suit="diamonds" /></span>
+              <span className="suit-red"><SuitIcon suit="hearts" /></span>
+              <span className="suit-gold"><SuitIcon suit="clubs" /></span>
+            </div>
+            <span className="table-logo-star-text">STAR</span>
+            <span className="table-logo-hokm-text">HOKM</span>
+          </div>
+
           <div className="seat-top-abs chair-slot">
+            <div className="chair-back" />
             <PlayerSeat
               player={playerBySeat[(mySeat + 2) % 4]}
               isHakem={hakemSeat === (mySeat + 2) % 4}
@@ -169,6 +210,7 @@ export default function GameScreen({ onBackToHome }) {
           </div>
 
           <div className="seat-left-abs chair-slot">
+            <div className="chair-back" />
             <PlayerSeat
               player={playerBySeat[(mySeat + 3) % 4]}
               isHakem={hakemSeat === (mySeat + 3) % 4}
@@ -192,6 +234,7 @@ export default function GameScreen({ onBackToHome }) {
           </div>
 
           <div className="seat-right-abs chair-slot">
+            <div className="chair-back" />
             <PlayerSeat
               player={playerBySeat[(mySeat + 1) % 4]}
               isHakem={hakemSeat === (mySeat + 1) % 4}
@@ -215,6 +258,7 @@ export default function GameScreen({ onBackToHome }) {
           </div>
 
           <div className="seat-bottom-abs chair-slot">
+            <div className="chair-back" />
             <PlayerSeat
               player={me}
               isHakem={hakemSeat === mySeat}

@@ -375,45 +375,8 @@ body {
 
 .table-felt {
   position: relative;
-  width: clamp(280px, 92vmin, 480px);
-  aspect-ratio: 3 / 2;
-  background-size: cover;
-  background-position: center 40%;
-  border-radius: 16px;
-}
-
-.table-felt .seat-top-abs {
-  position: absolute;
-  top: 30%;
-  left: 48.5%;
-  transform: translate(-50%, -50%);
-}
-
-.table-felt .seat-left-abs {
-  position: absolute;
-  top: 47%;
-  left: 27%;
-  transform: translate(-50%, -50%);
-}
-
-.table-felt .seat-right-abs {
-  position: absolute;
-  top: 47%;
-  left: 73.5%;
-  transform: translate(-50%, -50%);
-}
-
-.table-felt .seat-bottom-abs {
-  position: absolute;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.table-felt .chair-slot {
-  position: relative;
-  width: clamp(40px, 8vmin, 56px);
-  height: clamp(40px, 8vmin, 56px);
+  width: clamp(156px, 42vmin, 200px);
+  height: clamp(156px, 42vmin, 200px);
   display: flex;
   align-items: center;
   justify-content: center;
