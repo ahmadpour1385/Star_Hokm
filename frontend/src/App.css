@@ -357,7 +357,19 @@ body {
   --chair-d: clamp(66px, 21vmin, 88px);
   --seat-gap: clamp(0px, 0.6vw, 3px);
   --seat-center-dist: calc(var(--diamond-outer) * 0.7071 + var(--seat-gap) + var(--chair-d) / 2);
-  --vertex-dist: calc(var(--diamond-outer) * 0.7071);
+}
+
+.game-table-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--seat-center-dist) * 2);
+  height: calc(var(--seat-center-dist) * 2);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(154, 122, 46, 0.35);
+  pointer-events: none;
 }
 
 .game-table-wrapper::before {
@@ -396,9 +408,14 @@ body {
   border: 3px solid #766018;
 }
 
-.chair-slot .player-seat {
-  position: relative;
-  z-index: 1;
+.chair-slot {
+  position: absolute;
+  width: var(--chair-d);
+  height: var(--chair-d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
 }
 
 .seat-top-abs {
