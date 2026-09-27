@@ -298,8 +298,6 @@ export default function GameScreen({ onBackToHome }) {
             ))}
           </div>
         </div>
-      </div>
-
       <div className="my-hand">
         {sortedHand.map((cardId, idx) => (
           <div
