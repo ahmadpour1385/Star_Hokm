@@ -1,34 +1,30 @@
 import AvatarIcon from "./AvatarIcon";
 
 export default function PlayerSeat({ player, isHakem, isCurrentTurn, cardsCount, position, isOffline = false, nameAbove = false }) {
+  const side = nameAbove ? "ps-above" : "ps-below";
+
   if (!player) {
     return (
-      <div className={`player-seat player-seat-${position} player-seat-empty`}>
-        <div className="player-seat-name">— empty —</div>
+      <div className={`ps ${side} ps-empty ps-${position}`}>
+        <div className="ps-avatar">
+          <div className="ps-circle" />
+        </div>
       </div>
     );
   }
 
-  const nameEl = <div className="player-seat-name">{player.display_name}</div>;
-  const avatarEl = (
-    <div className="player-seat-avatar">
-      {isHakem && <span className="player-seat-crown">👑</span>}
-      <div className="player-seat-circle">
-        {player.avatar ? <AvatarIcon id={player.avatar} /> : player.display_name?.[0] || "?"}
-      </div>
-    </div>
-  );
-
   return (
     <div
-      className={`player-seat player-seat-${position} ${isCurrentTurn ? "player-seat-active" : ""} ${isOffline ? "player-seat-offline" : ""}`}
+      className={`ps ${side} ps-${position} ${isCurrentTurn ? "ps-active" : ""} ${isOffline ? "ps-offline" : ""}`}
     >
-      {nameAbove && nameEl}
-      {avatarEl}
-      {!nameAbove && nameEl}
-      <div className="player-seat-cards-count">
-        {isOffline ? "reconnecting..." : `🂠 ${cardsCount}`}
+      <div className="ps-avatar">
+        {isHakem && <span className="ps-crown">👑</span>}
+        <div className="ps-circle">
+          {player.avatar ? <AvatarIcon id={player.avatar} /> : player.display_name?.[0] || "?"}
+        </div>
       </div>
+      <div className="ps-name">{player.display_name}</div>
+      <div className="ps-count">{isOffline ? "reconnecting..." : `🂠 ${cardsCount}`}</div>
     </div>
   );
 }

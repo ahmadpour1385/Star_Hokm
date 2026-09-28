@@ -2064,3 +2064,375 @@ body {
   margin: 12px 0 8px;
   font-weight: 600;
 }
+/* ================= STAR HOKM TABLE v2 ================= */
+
+.tbl-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 26px 0 40px;
+
+  /* واحد پایه: همه‌ی اندازه‌ها از این ساخته میشن و خودکار با گوشی هماهنگ میشن */
+  --u: min(1vmin, 5.2px);
+  --T: calc(34 * var(--u));
+  --chair-d: calc(17 * var(--u));
+  /* ↓ این رو کم/زیاد کن: قطر نوار دایره‌ای و فاصله‌ی صندلی‌ها از میز با هم عوض میشه */
+  --seat-gap: calc(1.2 * var(--u));
+  --reach: calc(var(--T) * 0.7071 + 2.6 * var(--u));
+  --seat-center-dist: calc(var(--reach) + var(--seat-gap) + var(--chair-d) / 2);
+  --ray-d: calc(var(--T) * 0.57);
+}
+
+.tbl-felt {
+  position: relative;
+  width: calc(2 * var(--seat-center-dist) + var(--chair-d));
+  height: calc(2 * var(--seat-center-dist) + var(--chair-d));
+}
+
+/* نوار دایره‌ای که از وسط هر ۴ صندلی رد میشه */
+.tbl-felt::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(2 * var(--seat-center-dist));
+  height: calc(2 * var(--seat-center-dist));
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(154, 122, 46, 0.4);
+  pointer-events: none;
+}
+
+/* ---------- میز لوزی ---------- */
+
+.tbl-plate {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--T);
+  height: var(--T);
+  transform: translate(-50%, -50%) rotate(45deg);
+  border-radius: calc(2.6 * var(--u));
+  background:
+    repeating-linear-gradient(100deg, rgba(0, 0, 0, 0.16) 0 2px, transparent 2px 6px),
+    linear-gradient(135deg, #4a2a12 0%, #331d0d 55%, #24140a 100%);
+  border: max(3px, calc(0.9 * var(--u))) solid #7a6020;
+  box-shadow:
+    0 0 0 max(1px, calc(0.4 * var(--u))) #120c05,
+    0 calc(2.4 * var(--u)) calc(6 * var(--u)) rgba(0, 0, 0, 0.6),
+    inset 0 0 calc(4 * var(--u)) rgba(0, 0, 0, 0.45);
+  z-index: 0;
+}
+
+.tbl-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--T) + 3.6 * var(--u));
+  height: calc(var(--T) + 3.6 * var(--u));
+  transform: translate(-50%, -50%) rotate(45deg);
+  border-radius: calc(3.2 * var(--u));
+  border: 1px solid rgba(122, 96, 32, 0.55);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* نوار طلایی + مرکز مشکی */
+.tbl-medallion {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--T) * 0.66);
+  height: calc(var(--T) * 0.66);
+  transform: translate(-50%, -50%) rotate(45deg);
+  border-radius: calc(1.8 * var(--u));
+  background: radial-gradient(circle at 50% 40%, #151515, #050505 75%);
+  border: max(2px, calc(0.55 * var(--u))) solid #8a6d22;
+  box-shadow: inset 0 0 calc(3 * var(--u)) rgba(0, 0, 0, 0.8);
+  z-index: 1;
+}
+
+.tbl-medallion::after {
+  content: "";
+  position: absolute;
+  inset: 7%;
+  border-radius: calc(1.2 * var(--u));
+  border: 1px solid rgba(138, 109, 34, 0.4);
+}
+
+/* ---------- کانال ستاره‌ای هر راس (هر ۴ تا هم‌اندازه) ---------- */
+
+.tbl-vertex {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b8952f;
+  line-height: 1;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.tbl-vertex span:nth-child(1) { font-size: calc(2.4 * var(--u)); }
+.tbl-vertex span:nth-child(2) { font-size: calc(1.9 * var(--u)); opacity: 0.85; }
+.tbl-vertex span:nth-child(3) { font-size: calc(1.4 * var(--u)); opacity: 0.7; }
+
+.tbl-vertex-top {
+  flex-direction: column;
+  transform: translate(-50%, calc(-50% - var(--ray-d)));
+}
+.tbl-vertex-bottom {
+  flex-direction: column-reverse;
+  transform: translate(-50%, calc(-50% + var(--ray-d)));
+}
+.tbl-vertex-left {
+  flex-direction: row;
+  transform: translate(calc(-50% - var(--ray-d)), -50%);
+}
+.tbl-vertex-right {
+  flex-direction: row-reverse;
+  transform: translate(calc(-50% + var(--ray-d)), -50%);
+}
+
+/* ---------- لوگوی مرکز ---------- */
+
+.tbl-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(0.35 * var(--u));
+  pointer-events: none;
+  user-select: none;
+  z-index: 3;
+}
+
+.tbl-logo-star {
+  width: calc(6.4 * var(--u));
+  height: calc(6.4 * var(--u));
+}
+
+.tbl-logo-suits {
+  display: flex;
+  gap: calc(1.1 * var(--u));
+  font-size: calc(2 * var(--u));
+}
+
+.tbl-logo-suits .suit-red { color: #c4243a; }
+.tbl-logo-suits .suit-gold { color: #b8952f; }
+
+.tbl-logo-title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: calc(3.7 * var(--u));
+  letter-spacing: calc(0.5 * var(--u));
+  margin-right: calc(-0.5 * var(--u));
+  color: #c9a227;
+  line-height: 1;
+}
+
+.tbl-logo-sub {
+  display: flex;
+  align-items: center;
+  gap: calc(0.9 * var(--u));
+}
+
+.tbl-logo-sub span {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: calc(1.9 * var(--u));
+  letter-spacing: calc(0.9 * var(--u));
+  margin-right: calc(-0.9 * var(--u));
+  color: #9a7a2e;
+  line-height: 1.3;
+}
+
+.tbl-logo-sub i {
+  width: calc(2.6 * var(--u));
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #9a7a2e);
+}
+
+.tbl-logo-sub i:last-child {
+  background: linear-gradient(270deg, transparent, #9a7a2e);
+}
+
+/* ---------- کارت‌های روی میز ---------- */
+
+.tbl-cards {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 4;
+}
+
+.tbl-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tbl-card-top { transform: translate(-50%, calc(-50% - 8 * var(--u))); }
+.tbl-card-bottom { transform: translate(-50%, calc(-50% + 8 * var(--u))); }
+.tbl-card-left { transform: translate(calc(-50% - 8 * var(--u)), -50%); }
+.tbl-card-right { transform: translate(calc(-50% + 8 * var(--u)), -50%); }
+
+.tbl-card .card {
+  animation: tblCardIn 0.3s ease-out forwards;
+}
+
+@keyframes tblCardIn {
+  0% { transform: scale(1.15); opacity: 0.4; }
+  100% { transform: scale(0.72); opacity: 1; }
+}
+
+/* ---------- دسته‌های تریک ---------- */
+
+.tbl-pile {
+  position: absolute;
+  display: flex;
+  z-index: 4;
+}
+
+.tbl-pile-mine {
+  top: calc(50% + 16 * var(--u));
+  left: calc(50% + 12 * var(--u));
+}
+
+.tbl-pile-opp {
+  top: calc(50% - 16 * var(--u) - 24px);
+  left: calc(50% - 12 * var(--u) - 16px);
+}
+
+/* ---------- صندلی‌ها ---------- */
+
+.tbl-seat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--chair-d);
+  height: var(--chair-d);
+  z-index: 5;
+}
+
+.tbl-seat-top { transform: translate(-50%, calc(-50% - var(--seat-center-dist))); }
+.tbl-seat-bottom { transform: translate(-50%, calc(-50% + var(--seat-center-dist))); }
+.tbl-seat-left { transform: translate(calc(-50% - var(--seat-center-dist)), -50%); }
+.tbl-seat-right { transform: translate(calc(-50% + var(--seat-center-dist)), -50%); }
+
+.tbl-chair {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    repeating-linear-gradient(100deg, rgba(0, 0, 0, 0.18) 0 2px, transparent 2px 6px),
+    linear-gradient(160deg, #4a2a12, #2a190b);
+  border: max(2px, calc(0.7 * var(--u))) solid #7a6020;
+  box-shadow:
+    0 calc(0.9 * var(--u)) calc(2 * var(--u)) rgba(0, 0, 0, 0.6),
+    inset 0 0 calc(1.6 * var(--u)) rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- پروفایل بازیکن روی صندلی ---------- */
+
+.ps {
+  position: absolute;
+  inset: 0;
+}
+
+.ps-avatar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 84%;
+  height: 84%;
+  transform: translate(-50%, -50%);
+}
+
+.ps-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #0d2b1f;
+  border: max(1.5px, calc(0.3 * var(--u))) solid #0a0703;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d9b45c;
+  font-weight: 800;
+  font-size: calc(6 * var(--u));
+}
+
+.ps-circle .avatar-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.ps-crown {
+  position: absolute;
+  top: calc(-1.4 * var(--u));
+  right: calc(-1.2 * var(--u));
+  transform: rotate(20deg);
+  font-size: calc(3.4 * var(--u));
+  line-height: 1;
+  z-index: 3;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+
+.ps-name {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(var(--chair-d) * 1.6);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: max(10px, calc(2.6 * var(--u)));
+  font-weight: 700;
+  line-height: 1.2;
+  color: #f5e6c8;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.ps-count {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: max(9px, calc(2.2 * var(--u)));
+  line-height: 1.2;
+  color: #c9b896;
+}
+
+.ps-above .ps-name { bottom: calc(100% + 0.6 * var(--u)); }
+.ps-above .ps-count { top: calc(100% + 0.6 * var(--u)); }
+.ps-below .ps-name { top: calc(100% + 0.6 * var(--u)); }
+.ps-below .ps-count { top: calc(100% + 4.4 * var(--u)); }
+
+.ps-active .ps-circle {
+  box-shadow:
+    0 0 0 max(2px, calc(0.5 * var(--u))) #e2b93b,
+    0 0 calc(3.2 * var(--u)) rgba(226, 185, 59, 0.6);
+}
+
+.ps-offline {
+  opacity: 0.45;
+  filter: grayscale(0.7);
+}
+
+.ps-empty .ps-circle {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px dashed rgba(154, 122, 46, 0.5);
+}

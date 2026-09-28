@@ -8,6 +8,13 @@ import ConfirmBoard from "../components/ConfirmBoard";
 const SUITS = ["hearts", "diamonds", "clubs", "spades"];
 const SUIT_COLORS = { hearts: "red", diamonds: "red", clubs: "black", spades: "black" };
 
+const SEAT_LAYOUT = [
+  { key: "top", offset: 2, nameAbove: true },
+  { key: "left", offset: 3, nameAbove: true },
+  { key: "right", offset: 1, nameAbove: true },
+  { key: "bottom", offset: 0, nameAbove: false },
+];
+
 export default function GameScreen({ onBackToHome }) {
   const {
     room, userId, hakemSeat, hokmSuit, myHand, currentTurnSeat,
