@@ -149,162 +149,90 @@ export default function GameScreen({ onBackToHome }) {
         />
       )}
 
-        <div className="table-felt">
-          <div className="table-diamond-plate" />
-          <div className="table-outer-ring" />
-          <div className="table-center-medallion" />
+      <div className="tbl-wrap">
+        <div className="tbl-felt">
+          <div className="tbl-ring" />
+          <div className="tbl-plate" />
+          <div className="tbl-medallion" />
 
-          <div className="ray-line ray-line-top" />
-          <div className="ray-line ray-line-bottom" />
-          <div className="ray-line ray-line-left" />
-          <div className="ray-line ray-line-right" />
+          {["top", "bottom", "left", "right"].map((v) => (
+            <div key={v} className={`tbl-vertex tbl-vertex-${v}`}>
+              <span>✦</span>
+              <span>✦</span>
+              <span>✦</span>
+            </div>
+          ))}
 
-          <div className="ray-stars ray-stars-top">
-            <span>✦</span><span>✦</span><span>✦</span>
-          </div>
-          <div className="ray-stars ray-stars-bottom">
-            <span>✦</span><span>✦</span><span>✦</span>
-          </div>
-          <div className="ray-stars ray-stars-left">
-            <span>✦</span><span>✦</span><span>✦</span>
-          </div>
-          <div className="ray-stars ray-stars-right">
-            <span>✦</span><span>✦</span><span>✦</span>
-          </div>
-
-          <div className="table-logo">
-            <svg className="table-logo-star" viewBox="0 0 100 100">
+          <div className="tbl-logo">
+            <svg className="tbl-logo-star" viewBox="0 0 100 100">
               <polygon
                 points="50,6 61,38 95,38 67,58 78,90 50,70 22,90 33,58 5,38 39,38"
                 fill="none"
-                stroke="#b8891f"
-                strokeWidth="7"
+                stroke="#9a7a2e"
+                strokeWidth="6"
                 strokeLinejoin="round"
               />
             </svg>
-            <div className="table-logo-suits">
+            <div className="tbl-logo-suits">
               <span className="suit-gold"><SuitIcon suit="spades" /></span>
               <span className="suit-red"><SuitIcon suit="diamonds" /></span>
               <span className="suit-red"><SuitIcon suit="hearts" /></span>
               <span className="suit-gold"><SuitIcon suit="clubs" /></span>
             </div>
-            <span className="table-logo-star-text">STAR</span>
-            <span className="table-logo-hokm-text">HOKM</span>
+            <span className="tbl-logo-title">STAR</span>
+            <div className="tbl-logo-sub">
+              <i />
+              <span>HOKM</span>
+              <i />
+            </div>
           </div>
 
-          <div className="seat-top-abs chair-slot">
-            <div className="chair-back" />
-            <PlayerSeat
-              player={playerBySeat[(mySeat + 2) % 4]}
-              isHakem={hakemSeat === (mySeat + 2) % 4}
-              isCurrentTurn={currentTurnSeat === (mySeat + 2) % 4}
-              cardsCount={13}
-              position="top"
-              nameAbove={true}
-              isOffline={
-                playerBySeat[(mySeat + 2) % 4] &&
-                !room.connected_user_ids?.includes(
-                  playerBySeat[(mySeat + 2) % 4].user_id
-                )
-              }
-            />
-
-            {reactionForSeat((mySeat + 2) % 4) && (
-              <span className="emoji-bubble">
-                {reactionForSeat((mySeat + 2) % 4)}
-              </span>
-            )}
-          </div>
-
-          <div className="seat-left-abs chair-slot">
-            <div className="chair-back" />
-            <PlayerSeat
-              player={playerBySeat[(mySeat + 3) % 4]}
-              isHakem={hakemSeat === (mySeat + 3) % 4}
-              isCurrentTurn={currentTurnSeat === (mySeat + 3) % 4}
-              cardsCount={13}
-              position="left"
-              nameAbove={true}
-              isOffline={
-                playerBySeat[(mySeat + 3) % 4] &&
-                !room.connected_user_ids?.includes(
-                  playerBySeat[(mySeat + 3) % 4].user_id
-                )
-              }
-            />
-
-            {reactionForSeat((mySeat + 3) % 4) && (
-              <span className="emoji-bubble">
-                {reactionForSeat((mySeat + 3) % 4)}
-              </span>
-            )}
-          </div>
-
-          <div className="seat-right-abs chair-slot">
-            <div className="chair-back" />
-            <PlayerSeat
-              player={playerBySeat[(mySeat + 1) % 4]}
-              isHakem={hakemSeat === (mySeat + 1) % 4}
-              isCurrentTurn={currentTurnSeat === (mySeat + 1) % 4}
-              cardsCount={13}
-              position="right"
-              nameAbove={true}
-              isOffline={
-                playerBySeat[(mySeat + 1) % 4] &&
-                !room.connected_user_ids?.includes(
-                  playerBySeat[(mySeat + 1) % 4].user_id
-                )
-              }
-            />
-
-            {reactionForSeat((mySeat + 1) % 4) && (
-              <span className="emoji-bubble">
-                {reactionForSeat((mySeat + 1) % 4)}
-              </span>
-            )}
-          </div>
-
-          <div className="seat-bottom-abs chair-slot">
-            <div className="chair-back" />
-            <PlayerSeat
-              player={me}
-              isHakem={hakemSeat === mySeat}
-              isCurrentTurn={isMyTurn}
-              cardsCount={myHand.length}
-              position="bottom"
-              nameAbove={false}
-            />
-
-            {reactionForSeat(mySeat) && (
-              <span className="emoji-bubble">
-                {reactionForSeat(mySeat)}
-              </span>
-            )}
-          </div>
-
-          <div className="table-center">
+          <div className="tbl-cards">
             {tableCards.map((play, idx) => (
-              <div
-                key={idx}
-                className={`table-card table-card-${relativePosition(play.seat)}`}
-              >
+              <div key={idx} className={`tbl-card tbl-card-${relativePosition(play.seat)}`}>
                 <Card cardId={play.card} />
               </div>
             ))}
           </div>
 
-          <div className="won-tricks-pile">
+          <div className="tbl-pile tbl-pile-mine">
             {Array.from({ length: myTricks }).map((_, i) => (
               <div key={i} className="won-trick-mini" />
             ))}
           </div>
 
-          <div className="opp-trick-pile">
+          <div className="tbl-pile tbl-pile-opp">
             {Array.from({ length: oppTricks }).map((_, i) => (
               <div key={i} className="won-trick-mini" />
             ))}
           </div>
+
+          {SEAT_LAYOUT.map(({ key, offset, nameAbove }) => {
+            const seatNum = (mySeat + offset) % 4;
+            const player = playerBySeat[seatNum];
+            const reaction = reactionForSeat(seatNum);
+            return (
+              <div key={key} className={`tbl-seat tbl-seat-${key}`}>
+                <div className="tbl-chair" />
+                <PlayerSeat
+                  player={player}
+                  isHakem={hakemSeat === seatNum}
+                  isCurrentTurn={currentTurnSeat === seatNum}
+                  cardsCount={key === "bottom" ? myHand.length : 13}
+                  position={key}
+                  nameAbove={nameAbove}
+                  isOffline={
+                    key !== "bottom" &&
+                    player &&
+                    !room.connected_user_ids?.includes(player.user_id)
+                  }
+                />
+                {reaction && <span className="emoji-bubble">{reaction}</span>}
+              </div>
+            );
+          })}
         </div>
+      </div>
       <div className="my-hand">
         {sortedHand.map((cardId, idx) => (
           <div
