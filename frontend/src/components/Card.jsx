@@ -61,6 +61,37 @@ function FaceIcon({ rank }) {
   );
 }
 
+const PIP_LAYOUTS = {
+  2: [[50, 22], [50, 78]],
+  3: [[50, 18], [50, 50], [50, 82]],
+  4: [[28, 22], [72, 22], [28, 78], [72, 78]],
+  5: [[28, 22], [72, 22], [50, 50], [28, 78], [72, 78]],
+  6: [[28, 20], [72, 20], [28, 50], [72, 50], [28, 80], [72, 80]],
+  7: [[28, 16], [72, 16], [50, 33], [28, 50], [72, 50], [28, 84], [72, 84]],
+  8: [[28, 15], [72, 15], [50, 32], [28, 50], [72, 50], [50, 68], [28, 85], [72, 85]],
+  9: [[28, 13], [72, 13], [28, 37], [72, 37], [50, 50], [28, 63], [72, 63], [28, 87], [72, 87]],
+  10: [[28, 12], [72, 12], [50, 26], [28, 40], [72, 40], [28, 60], [72, 60], [50, 74], [28, 88], [72, 88]],
+};
+
+const FLIP_ROWS = new Set([0, 1, 2, 6, 7]);
+
+function PipCard({ rank, suit }) {
+  const layout = PIP_LAYOUTS[Number(rank)];
+  return (
+    <div className="card-pips">
+      {layout.map(([x, y], i) => (
+        <span
+          key={i}
+          className={`card-pip ${FLIP_ROWS.has(i) && layout.length > 4 ? "flipped" : ""}`}
+          style={{ left: `${x}%`, top: `${y}%` }}
+        >
+          <SuitIcon suit={suit} />
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export default function Card({ cardId, faceDown = false, disabled = false, onClick, small = false }) {
   if (faceDown) {
     return (
@@ -103,8 +134,10 @@ export default function Card({ cardId, faceDown = false, disabled = false, onCli
             <FaceIcon rank={rank} />
           </div>
         </div>
+      ) : rank === "A" ? (
+        <div className="card-center-suit card-ace-suit"><SuitIcon suit={suit} /></div>
       ) : (
-        <div className="card-center-suit"><SuitIcon suit={suit} /></div>
+        <PipCard rank={rank} suit={suit} />
       )}
 
       {!isFace && (

@@ -2436,3 +2436,24 @@ body {
   background: rgba(0, 0, 0, 0.35);
   border: 1px dashed rgba(154, 122, 46, 0.5);
 }
+
+.card-pips {
+  position: absolute;
+  inset: 14px 5px;
+}
+
+.card-pip {
+  position: absolute;
+  width: 22%;
+  transform: translate(-50%, -50%);
+  color: inherit;
+}
+
+.card-pip.flipped {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.card-ace-suit {
+  font-size: 30px;
+  filter: drop-shadow(0 0 5px currentColor);
+}
